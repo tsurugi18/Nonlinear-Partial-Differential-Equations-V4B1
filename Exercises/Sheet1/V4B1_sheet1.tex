@@ -1,0 +1,112 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{bbm}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{calrsfs}
+\usepackage{tikz-cd} 
+
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{proposition}{Proposition}[section] 
+\newtheorem{definition}{Definition}[section] 
+\newtheorem{lemma}{Lemma}[section] 
+\newtheorem{notation}{Notation}[section] 
+\newtheorem{remark}{Remark}[section] 
+\newtheorem{corollary}{Corollary}[section] 
+\newtheorem{terminology}{Terminology}[section] 
+\newtheorem{example}{Example}[section] 
+
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\PreSh}{PreSh}
+\DeclareMathOperator{\Fun}{Fun}
+
+
+\title{Nonlinear Partial Differential Equations Exercise Sheet 1 Solutions}
+\author{So Murata}
+\date{2024/2025 Winter Semester - Uni Bonn}
+
+\begin{document}
+\maketitle
+\section*{Exercise 1}
+
+Suppose the inequality does not hold. Then for each $n$, there is $v_n$ such that
+\begin{equation*}
+\Vert v_n\Vert_{L^p(\Omega)} > n\Vert Du\Vert_{L^p(\Omega)}.
+\end{equation*}
+Normalizing $v_n$, we obtain a sequence $(v_k)_{k\in\mathbb{N}}$ such that
+\begin{equation*}
+\Vert Du\Vert_{L^p(\Omega)} < {\frac 1 n}.
+\end{equation*}
+Since $(v_k)_{k\in\mathbb{N}}$ is bounded, there is a subsequence $(v_{k_j})_{j\in\mathbb{N}}$ converging to some $u$. Then its derivative is $0$ by the assumption. Then $u=0$ but $\Vert u\Vert_{L^p(\Omega)}=1$. Thus a contradiction.
+
+\section*{Exercise 2}
+
+\subsection*{(i)}
+
+Suppose if we have a weak solution, by integration by parts, we get
+
+\begin{align*}
+\int_U fv &=-\int_\Omega \Delta uvdx,\\
+& =  \int_{\Omega}\nabla u\cdot\nabla vdx-\int_{\partial\Omega}{\frac {\partial u} {\partial \nu}}vdx ,\\
+&= \int_{\Omega}\nabla u\cdot\nabla vdx-\int_{\partial\Omega}\beta uvdx .
+\end{align*}
+
+for any $v\in H^1(\Omega)$. We define a bilinear form $B(u,v):H^1(\Omega)\times H^1(\Omega)\to\mathbb{R}$ such that
+\begin{equation*}
+B(u,v) =  \int_{\Omega}\nabla u\cdot\nabla vdx-\int_{\partial\Omega}\beta uvdx.
+\end{equation*}
+
+By trace theorem, we have
+\begin{align*}
+|B(u,v)| &\leq \Vert Du\Vert_{L^2(\Omega)}\Vert Dv\Vert_{L^2(\Omega)}+\vert\beta\vert\Vert u\Vert_{L^2(\partial\Omega)}\Vert v\Vert_{L^2(\partial\Omega)},\\
+&\leq \Vert Du\Vert_{L^2(\Omega)}\Vert Dv\Vert_{L^2(\Omega)}+\vert\beta\vert C^2\Vert u\Vert_{H^1(\Omega)}\Vert v\Vert_{H^1(\Omega)},\\
+\end{align*}
+for some $C>0$. By the definition, we have
+\begin{equation*}
+\Vert u\Vert_{H^1(\Omega)}^2 = \Vert Du\Vert_{L^2(\Omega)}^2+\Vert u\Vert_{L^2(\Omega)}^2.
+\end{equation*}
+Thus we conclude
+\begin{equation*}
+|B(u,v)|\leq (\vert\beta\vert C^2+1)\Vert u\Vert_{H^1(\Omega)}\Vert v\Vert_{H^1(\Omega)}
+\end{equation*}
+, and this satisfies the first condition for Lax-Milgram theorem.\\
+
+\par In the case $\beta\leq 0$, we will prove that $B$ satisfies the second condition as well. In order to do so, we will derive a contradiction by assuming it does not satisfy the condition. If that is the case the it is equivalent to say that for any $n\in\mathbb{N}$, there is $u_n\in H^1(\Omega)$ such that
+
+\begin{align*}
+B(u_n,u_n)<{\frac 1 n}\Vert u_n\Vert_{H^1(\Omega)}^2.
+\end{align*}
+We can normalize $u_n$ and conclude that 
+\begin{align*}
+B(u_n,u_n)<{\frac 1 n}.
+\end{align*}
+Since $\partial \Omega$ is a unit circle around the center, it is Lipschitz. As the sequence is bounded, it contains a subsequence $(u_{n_k})_{k\in\mathbb{N}}$ that converges to $u$ in $L^2(\Omega)$ thus weak derivative $(Du_{n_k})_{k\in\mathbb{N}}$ converges weakly.\\
+\par Now we derive a contradiction by 
+\begin{equation*}
+B(u_{n_k},u_{n_k}) = \Vert Du_{n_k}\Vert^2_{L^2(\Omega)}-\beta\int_{\partial\Omega} (Tu_{n_k})^2\to 0.
+\end{equation*} 
+This implies
+\begin{equation*}
+ \Vert Du\Vert^2_{L^2(\Omega)}=0
+\end{equation*}
+Therefore, $u$ is a constant. On the other hands, we have that
+\begin{equation*}
+u|_{\partial \Omega}=0.
+\end{equation*}
+This is a contradiction as $\Vert u\Vert_{H^1(\Omega)}=1$. We conclude that $B$ satisfies the conditions for Lax-Milgram theorem, therefore has a unique solution.
+\end{document}

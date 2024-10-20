@@ -1,0 +1,591 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{bbm}
+\usepackage{lipsum}
+
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{proposition}{Proposition}[section] 
+\newtheorem{definition}{Definition}[section] 
+\newtheorem{lemma}{Lemma}[section] 
+\newtheorem{notation}{Notation}[section] 
+\newtheorem{remark}{Remark}[section] 
+\newtheorem{corollary}{Corollary}[section] 
+\newtheorem{terminology}{Terminology}[section] 
+\newtheorem{example}{Example}[section] 
+\numberwithin{equation}{section}
+
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\PreSh}{PreSh}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\esssup}{esssup}
+
+\title{Nonlinear Partial Differential Equations 1}
+\author{So Murata}
+\date{2024/2025 Winter Semester - Uni Bonn}
+
+\begin{document}
+\maketitle
+
+\section{Preliminaries}
+
+\subsection{Measure theory}
+
+\subsection{Sobolev spaces}
+
+\begin{definition}
+A $n$-dimensional multi-index is a $n$-tuple in $\mathbb{N}_0^n$. And for such $n$-tuple $\alpha$ we define $|\alpha| = \sum_{i=1}^n \alpha_i$. 
+\end{definition}
+
+\begin{definition}
+Let $U$ be an open subset of $n$-dimensional real Euclidean space. A measurable function $f:U\to\mathbb{C}$ is said to be locally integrable over $U$ if for any compact subset $K$ of $U$, the integral $\int_K|f|dx$ is finite. The set of all such functions is denoted by $L^1_{\mathbf{loc}}(U)$.
+\end{definition}
+
+\begin{definition}
+Let $X$ be a topological space. $f:X\to\mathbb{R}$ is said to be compactly supported if there is a compact subset $K$ of $X$ such that $f(X-K) = \{0\}$. 
+\end{definition}
+
+\begin{definition}
+Let $U$ be an open subset of $\mathbb{R}^n$. A test function $\phi:U\to\mathbb{R}$ is a function such that it is infinitely continuously differentiable and compactly supported. The set of all such functions over $U$ is denoted by $\mathcal{C}^\infty_C(U)$.
+\end{definition}
+
+\begin{definition}
+Let $u:U\to\mathbb{R}$ be a $|\alpha|$ times continuously differentiable function over an open subset $U$ of $\mathbb{R}^n$. Then the partial-derivative respect to $\alpha$ is 
+\begin{equation*}
+D^\alpha u= {\frac {\partial^{|\alpha|}u} {\partial x_1^{\alpha_1}\cdots\partial x_n^{\alpha_n}}}.
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+Let $u,v\in L^1_{\mathbf{loc}}(U)$ where $U$ is an open subset of $\mathbb{R}^n$ and $\alpha$ be a multi-index. We say that $\alpha$-th weak derivative of $u$ is $v$(denoted as $D^\alpha u=v$), if the following equality holds.
+\begin{equation*}
+\int_U uD^\alpha\phi dx = (-1)^{|\alpha|}\int_v\phi dx
+\end{equation*}
+for any test function $\phi$. 
+\end{definition}
+
+\begin{remark}
+In the definition above, if $|\alpha|=1$, this means the integration by parts.
+\end{remark}
+
+\begin{lemma}
+Weak derivatives are unique almost everywhere. In other words, if $v_1,v_2$ are weak derivatives for $u$, then for any $\phi\in\mathcal{C}^\infty_C(U)$ we have
+\begin{equation*}
+\int_U (v_1-v_2)\phi dx = 0.
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+The above equality is clear as the left-hand side equals to 
+\begin{equation*}\int_U uD^\alpha \phi dx-\int_U uD^\alpha \phi dx.
+\end{equation*}
+\end{proof}
+
+\begin{definition}
+Let $U$ be an open subset of $\mathbb{R}^n$, $k\in\mathbb{N}$, $p\in[1,\infty]$. We define the Sobolev space with $k$ and $p$ over $U$ such that 
+\begin{equation*}
+W^{k,p}(U) = \{u\in L^1_{\mathbf{loc}}(U)\:|\: \forall \alpha\in\mathbb{N}_0^n, |\alpha|\leq k \Rightarrow D^\alpha u\in L^p(U)\}.
+\end{equation*}
+\end{definition}
+
+\begin{notation}
+For the case $p=2$ we denote $W^{k,2}(U) = H^k(U)$. 
+\end{notation}
+
+\begin{remark}
+When $k=0$ we have $W^{0,p}(U) = L^p(U)$.
+\end{remark}
+
+\begin{definition}
+The essential supremum of a functional $f:U\to\mathbb{R}$ is 
+\begin{equation*}
+\esssup_U(f)\inf\{c\in\mathbb{R}\:|\: \forall x\in U, f(x)\leq c\}.
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+We define a norm on a Sobolev space $W^{k,p}(U)$ such that for $u\in W^{k,p}(U)$,
+\begin{equation*}
+\Vert u \Vert_{W^{k,p}(U)} = 
+\begin{cases}
+\bigg{(}\sum_{|\alpha|\leq k} \int_U|D^\alpha u|^pdx\bigg{)}^{{\frac 1 p}}\quad(1\leq p<\infty),\\
+\\
+\sum_{|\alpha|\leq k}\esssup_U(|D^\alpha u|)\quad(p=\infty).
+\end{cases}
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+A sequence in the Sobolev space $W^{k,p}(U)$ converges if it converges in its Sobolev norm.
+\end{definition}
+
+\begin{definition}
+For a sequence $(u_m)\subset W^{k,p}(U)$, $u_m\to u$ in $W_{\mathbf{loc}}^{k,p}(U)$ if for any compact subset $K$ of $U$, we have $u_m\to u$ in $W_{\mathbf{loc}}^{k,p}(K)$.
+\end{definition}
+
+\begin{definition}
+The Sobolev space $W^{k,p}_0(U)$ with boundary value zero at $\partial U$  is the closure of $C^{\infty}_C(U)$ in the topology induced by the Sobolev norm.
+\end{definition}
+
+\subsection{Example}
+
+Let $U=B(0,1)$ be a unit ball in $\mathbb{R}^n$ and $u:U\to\mathbb{R}$ be such that $u(x) = \Vert x \Vert ^{-\alpha}$ for any $x$ except $0$. Then we have the following statement,
+\begin{equation*}
+u\in W^{1,p}(U)\Leftrightarrow \alpha<{\frac {n-p} {p}}.
+\end{equation*}
+
+Let us consider $\{r_k\}_{k\in\mathbb{N}}\subset B(0,1)=U$ such that it is dense in $U$. The function 
+\begin{equation*}
+u(x) = \sum_{k=1}^\infty {\frac 1 {2^l}}|x-r_k|^{-\alpha},
+\end{equation*}
+
+is in $W^{1,p}(U)$ if and only if $\alpha={\frac {n-p} {p}}$. This function is not bounded in any ball contained in $U$. (Use the fact that $p<n$) but $u\not\in L^\infty(U)$. 
+
+\begin{theorem}
+Let $U$ be an open and bounded set in $\mathbb{R}^n$. Suppose that $u\in W^{k,p}(U)$, then there exists a sequence $(u_m)_{m\in\mathbb{N}}\subset C^\infty(U)\cap W^{k,p}(U)$ such that $u_m\to u$ in $W^{k,p}(U)$. 
+\end{theorem}
+
+\subsection{Sobolev Inequalities}
+
+\begin{definition}
+Let $p\in[1,\infty)$. The Soolev conjugate of $p$ is 
+\begin{equation*}
+p^* = {\frac {np} {n-p}}.
+\end{equation*} 
+\end{definition}
+
+\begin{remark}
+From the definition we see 
+\begin{equation*}
+{\frac 1 {p^*}} = {\frac 1 p}-{\frac 1 n}.
+\end{equation*}
+Thus $p^*>p$.
+\end{remark}
+
+\begin{theorem}
+\label{poincare_ineq}
+Let $U\subset \mathbb{R}^n$ be an open bounded set and $u\in W^{1,p}(U)$. Then there exists a constant $C$ only depending on $n$ and $U$ such that
+\begin{equation*}
+\Vert u - (u)_U\Vert_{L^2(U)}\leq C(n,U)\Vert Du\Vert|_{L^2(U)},
+\end{equation*}
+where 
+\begin{equation*}
+(u)_U={\frac 1 {\mu(U)}}\int_U udx.
+\end{equation*}
+\end{theorem}
+
+\begin{corollary}
+In Theorem \ref{poincare_ineq}, if we have $u\in H_0^1(U)$, then there exists a constant $C$ only depending on $n$ and $U$ such that
+\begin{equation*}
+\Vert u \Vert_{L^2(U)}\leq C(n,U)\Vert Du\Vert|_{L^2(U)},
+\end{equation*}
+\end{corollary}
+
+\begin{remark}
+We may now replace the Sobolev norm in $H^1_0(U)$ with $\Vert Du\Vert_{L^2(U)}$. Recall that the norm defined on $H^1_0(U)$ is 
+\begin{equation*}
+\Vert u\Vert_{H^1_0(U)} = \Vert u\Vert_{L^2(U)}+\Vert Du\Vert_{L^2(U)}.
+\end{equation*}
+By the corollary, we obtain the inequality,
+\begin{equation*}
+\Vert Du\Vert|_{L^2(U)}\leq\Vert u\Vert_{H^1_0(U)} \leq C(n,U)\Vert Du\Vert|_{L^2(U)}.
+\end{equation*}
+Therefore, $\Vert Du\Vert|_{L^2(U)}$ induces same topology as the Sobolev norm.
+\end{remark}
+
+\section{Second Order Elliptic Equations}
+
+\subsection{Definitions}
+
+\begin{notation}
+For a function $u:U\to\mathbb{R}$ where $U$ is an open subset of $\mathbb{R}^n$, we use the following notation.
+\begin{equation*}
+{\frac {\partial u} {\partial x_i}} = u_{x_i}.
+\end{equation*}
+\end{notation}
+
+\begin{definition}
+Give an open bounded subset $U$ of $\mathbb{R}^n$, $f:U\to\mathbb{R}$. The second order elliptic equation is the problem to find functions $u:\overline{U}\to\mathbb{R}$ which satisfies the following equations,
+\begin{equation*}
+\begin{cases}
+Lu(x)=f(x)\quad (x\in U),\\
+u(x)\equiv 0 \quad(x\in\partial U),
+\end{cases}
+\end{equation*}
+
+where $L$ is called a second-order partial differential operator such that for any $u:U\to\mathbb{R}$, 
+\begin{equation}
+\label{eq:2.1}
+Lu = -\sum_{i,j=1}^n (a^{i,j}(x)u_{x_i})_{x_j}+\sum_{i=1}^nb^i(x)u_{x_i}+c(x)u,
+\end{equation}
+where for each $i,j=1,\cdots,n$, $a^{i,j},b^i,c:U\to\mathbb{R}$. 
+\end{definition}
+
+\begin{remark}
+If $a^{i,j}$ are differentiable on $U$ for each $i,j=1,\cdots,n$, we can rewrite Equation \ref{eq:2.1} to be such that
+\begin{equation}
+\label{eq:2.2}
+Lu = -\sum_{i,j=1}^n a^{i,j}(x)u_{x_ix_j}+\sum_{i=1}^n\overline{b}^i(x)u_{x_i}+c(x)u,
+\end{equation}
+where for each $i=1,\cdots,n$,
+\begin{equation*}
+\overline{b}^i(x) = b_i(x)-\sum_{j=1}^n (a^{i,j}(x))_{x_j}(x).
+\end{equation*}
+This is due to the Leibniz rule.
+\end{remark}
+
+\begin{remark}
+In the case $u\in\mathcal{C}^2(U)$, we may assume that $a_{i,j}=a{j,i}$ for each $i,j=1,\cdots,n$ from now on. This is justified by the following procedure.
+Given $(a^{i,j})_{i,j=1\cdots,n}$ we define $(\tilde{a}^{i,j})_{i,j=1\cdots,n}$ in the following way,
+\begin{equation*}
+\tilde{a}^{i,j}(x) = {\frac 1 2}(a^{i,j}(x)+a^{j,i}(x)).
+\end{equation*}
+Because the first part of the equation \ref{eq:2.1} can be rewritten as
+\begin{equation*}
+\sum_{i,j=1}^n {\frac 1 2}(a^{i,j}(x)+a^{j,i}(x))u_{x_ix_j}+\sum_{i,j=1}^n{\frac 1 2}(a^{i,j}(x)-a^{j,i}(x))u_{x_ix_j}.
+\end{equation*}
+Using Young's theorem we derive that
+\begin{equation*}
+\sum_{i,j=1}^n{\frac 1 2}(a^{i,j}(x)-a^{j,i}(x))u_{x_ix_j} = 0.
+\end{equation*}
+\end{remark}
+
+\begin{definition}
+A second-order partial differential operator is said to be uniformly elliptic if there is $\theta>0$ such that for any $\xi\in\mathbb{R}^n$
+\begin{equation*}
+\sum_{i,j=1}^n a^{i,j}(x)\xi_i\xi_j \geq \theta\Vert \xi\Vert^2 
+\end{equation*}
+holds for almost everywhere on $U$.
+\end{definition}
+
+\begin{remark}
+The above definition can be stated in a different manner. Given a quadratic form $A(x) = (a^{i,j}(x))_{i,j=1,\cdots,n}$. The problem is uniformly elliptic if and only if 
+\begin{equation*}
+A(x)\geq \theta I
+\end{equation*}
+holds almost everywhere for a fixed constant $\theta>0$.
+\end{remark}
+
+\begin{example}
+If we take $a^{i,j}=\delta_{i,j}$, and $b^i,c\equiv 0$, the problem is 
+\begin{equation*}
+Lu = -\Delta u.
+\end{equation*}
+\end{example}
+
+\subsection{Weak Solutions}
+
+In this subsection, we assume that $a^{i,j},b^i,c\in L^\infty(U)$ for each $i,j=1,\cdots,n$ and $f\in L^2(U)$. Suppose we have a second-order elliptic equation. Then by multiplying $v\in\mathcal{C}^\infty_0(U)$, we get
+\begin{equation*}
+-\int_U\sum_{i,j=1}^n(a^{i,j}(x)u_{x_i})_{x_j}vdx = \int_U\sum_{i,j=1}^na^{i,j}(x)u_{x_i}v_{x_j}dx
+\end{equation*}
+which is well-defined fi $\Vert Dv\Vert\in L^1(U)$. 
+
+\begin{definition}
+Given a second-order elliptic equation, we define a bilinear form $B:H_0^1(U)\times H_0^1(U)\to\mathbb{R}$ such that
+
+\begin{equation*}
+B(u,v) = \int_U\sum_{i,j=1}^na^{i,j}(x)u_{x_i}v_{x_j}+\sum_{i=1}^nb^i(x)u{x_i}v+c(x)uvdx
+\end{equation*}
+\end{definition}
+
+\begin{remark}
+Such $B(u,v)$ is a well-defined continuous bilinear form.
+\end{remark}
+
+\begin{definition}
+Given a second-order elliptic equation
+\begin{equation*}
+\begin{cases}
+Lu(x) = f(x) \quad (x\in U),\\
+u(x) = 0 \quad (x\in \partial U).
+\end{cases}
+\end{equation*}
+A function $u\in H_0^1(U)$ is called a weak solution to the problem if for any $v\in H_0^1(U)$, we have
+\begin{equation*}
+B(u,v) = \langle f,v\rangle_{L^2(U)}.
+\end{equation*}
+\end{definition}
+
+\begin{remark}
+Suppose we have a classical solution $u$, (in other words $u\in\mathcal{C}^2(U)$ and $a^{i,j}\in C^1(U)$). Then such $u$ is also a weak solution. 
+\end{remark}
+
+\begin{remark}
+Suppose for $u\in H_0^1(U)$, we have that for any $v\in\mathcal{C}_0^\infty(U)$
+\begin{equation*}
+B(u,v) = \langle f,v\rangle_{L^2(U)}.
+\end{equation*}
+Then such $u$ is a weak-solution, as $\mathcal{C}_0^\infty(U)$ is dense in $H_0^1(U)$.
+\end{remark}
+
+We could also replace the condition on $f$ which is that $f\in L^2(U)$ to $f\in H^{-1}(U)$. 
+
+\begin{definition}
+Given a second-order elliptic equation, we say that $u\in H_0^1(U)$ is a weak solution of the problem if
+\begin{equation*}
+B[u,v]=\langle f,v\rangle,
+\end{equation*}
+where
+\begin{equation*}
+\langle f,v\rangle = \int_U f^0v+\sum_{i=1}^n f^iv_{x_i}dx\quad(f^0,f^1,\cdots,f^n\in L^2(U)),
+\end{equation*}
+is the duality pairing of $H^{-1}(U)$ and $H_0^1(U)$.
+\end{definition}
+
+\begin{proposition}
+\par Suppose we have a problem
+\begin{equation*}
+\begin{cases}
+Lu(x) = f(x)\quad(x\in U),\\
+u(x) = g(x)\quad(x\in\partial U).
+\end{cases}
+\end{equation*}
+where $\partial U$ is smoothly parametrizable. Furthermore, suppose there is $w\in H^1(U)$ such that 
+\begin{equation*}
+w(x) = g(x) \quad (x\in\partial U).
+\end{equation*}
+Then for the modified problem,
+\begin{equation*}
+\begin{cases}
+L(u(x)) = f(x)-Lw(x)\quad(x\in U),\\
+u(x) = 0\quad(x\in\partial U).
+\end{cases}
+\end{equation*}
+we can get solutions of the original problem given a solution of the second one and adding $w$ to it.
+\end{proposition}
+
+\begin{proof}
+In order to show that such modified problem is indeed well-defined, we have to prove that
+\begin{equation*}
+f-Lw\in H^{-1}(U).
+\end{equation*}
+By definition, $w\in H^1(U)$ thus $w_{x_i}\in L^2(U)$ for any $i=1,\cdots,n$. For any $i,j=1,\cdots,n, a^{i,j}\in L^\infty(U)$. We now deduce that $a^{i,j}w_{x_i}\in L^2(U)$. Later.
+\end{proof}
+
+\subsection{Existence of Weak Solutions}
+
+\begin{theorem}[Lax-Milgram]
+\label{LM}
+Let $(H,\langle\cdot,\cdot\rangle_H)$ be a real Hilbert space and $H^*$ be the dual of it. Assume that for a bilinear form $B:H\times H\to\mathbb{R}$, there exists $\alpha,\beta>0$ such that
+\begin{enumerate}[i).]
+\item $\vert B(u,v)\vert\leq \alpha\Vert u\Vert\Vert v\Vert$,
+\item for any $v\in H$, $\beta\Vert u\Vert^2\leq B(u,v)$.
+\end{enumerate}
+Then for each $f\in H^*$, there is a unique $u\in H$ such that
+\begin{equation*}
+B(u,v) = \langle f,v\rangle_H.
+\end{equation*}
+\end{theorem}
+
+\begin{proof}
+Given $u\in H$, the mapping $v\mapsto B(u,v)$ is a bounded linear operator by the first condition on $B$. By Riesz representation theorem, there is unique $w\in H$ such that 
+\begin{equation*}
+B(u,v) = \langle w,v\rangle_H.
+\end{equation*}
+Let us define $A:H\to H$ to be such that $A(u) = w$ where $w$ is acquired through the above construction. We will show that $A$ is a bounded linear operator.\\
+\par We first show that it is linear. Given $\lambda_1,\lambda_2\in \mathbb{R}$ and $u_1,u_2\in H$,
+\begin{align*}
+\langle A(\lambda_1u_1+\lambda_2u_2,)v\rangle_H & = B(\lambda_1u_1+\lambda_2u_2,v)\\
+& = \lambda_1B(u_1,v)+\lambda_2B(u_2,v)\\
+& = \lambda_1\langle Au_1,v\rangle_H+\lambda_2\langle Au_2,v\rangle_H\\
+& = \langle A\lambda_1u_1+A\lambda_2u_2,v\rangle_H
+\end{align*}
+holds for any $v\in H$. Thus by uniqueness from Riesz representation theorem, we have proved that $A$ is linear.\\
+\par We then prove that $A$ is bounded.
+\begin{align*}
+\Vert Au\Vert^2& = \langle Au,Au\rangle_H,\\
+& = B(u,Au),\\
+& \leq \alpha\Vert u\Vert\Vert Au\Vert,\\
+&\Rightarrow \Vert Au\Vert\leq \alpha\Vert u\Vert,
+\end{align*}
+by the first condition on $B$.\\
+\par Such $A$ has following two properties.
+\begin{enumerate}[i).]
+\item $A$ is injective,
+\item $\mathcal{R}(A)$, the range of $A$ is closed.
+\end{enumerate}
+
+Suppose $Au=0$ then by the second condition on $B$ we derive
+\begin{align*}
+\beta\Vert u\Vert^2 &\leq B(u,u),\\
+& = \langle Au,u\rangle_H,\\
+& \leq \Vert Au\Vert\Vert u\Vert\\
+&\Rightarrow \beta\Vert u\Vert\leq\Vert Au\Vert = 0.
+\end{align*}
+
+Let $(Au_n)_{n\in\mathbb{N}}\subset\mathcal{R}(A)$ be a convergent sequence with its limit $w^*$. Using the second condition on $B$ and the previous argument on the norm of $Au$ once again, we derive
+\begin{align*}
+\beta\Vert u_n-u_m\Vert&\leq\Vert A(u_n-u_m)\Vert,\\
+& =\Vert Au_n-Au_m\Vert.
+\end{align*}
+Sincer $(Au_n)_{n\in\mathbb{N}}$ is a Cauchy sequence we derived that $(u_n)_{n\in\mathbb{N}}$ is also a Cauchy sequence in a complete space, thus convergent. We define the limit to be $u^*$. By continuity of $A$, we have $Au^*= w^*$.\\
+\par We now prove that $\mathcal{R}(A)=H$. Suppose not, $\mathcal{R}(A)\not=H$, then we know that $\mathcal{R}(A)$ is closed therefore
+\begin{equation*}
+(M^\perp)^\perp = M\not=H.
+\end{equation*}
+This shows that $M^\perp\not=\{0\}$. Take $u^\perp\in\mathcal{R}(A)^\perp$ and $u=Au^\perp$ which is in $\mathcal{R}(A)$. Then we have
+\begin{equation*}
+\beta\Vert u^\perp\Vert^2 \leq B(u^\perp,u^\perp)=\langle Au^\perp,u^\perp\rangle_H=0.
+\end{equation*} 
+Therefore, we derived $\Vert u^\perp\Vert = 0$ which is a contradiction. We conclude $\mathcal{R}(A)=H$.\\
+\par Using Riesz representation theorem, there exists $w\in H$ such that for any $v\in H$,
+\begin{equation*}
+\langle f, v\rangle_H=\langle w,v\rangle_H.
+\end{equation*}
+By the subjectivity of $A$, there is $u\in H$ such that $Au=w$. Therefore we derive the formula,
+\begin{equation*}
+B(u,v) = \langle Au,v\rangle_H= \langle w,v\rangle_H = \langle f, v\rangle_H.
+\end{equation*}
+Now we will prove the uniqueness of such $u$. Suppose $u,\overline{u}\in H$ are such that
+\begin{equation*}
+ \langle u,v\rangle_H=\langle f, u\rangle_H=\langle \overline{u},v\rangle_H.
+\end{equation*}
+Then by the linearity of the scalar product, we obtain that for any $v\in H$,
+\begin{equation*}
+B(u-\overline{u},v)=0.
+\end{equation*}
+In particular, when $v=u-\overline{u}$, we obtain,
+\begin{equation*}
+\beta\Vert u-\overline{u}\Vert^2=0.
+\end{equation*}
+Thus the uniqueness is proven.
+\end{proof}
+
+\begin{remark}
+$B$ does not have to be symmetric. In the case when $B$ is symmetric, the theorem is trivial.\\
+\par This comes from by defining $(u,v)=B(u,v)$ a new scalar product which is possible since $B$ is symmetric and by the second condition we have
+\begin{equation*}
+(u,u)\geq\beta\Vert u\Vert^2\Rightarrow ((u,u)=0\Leftrightarrow u=0).
+\end{equation*}
+Using the Riesz representation theorem for $(\cdot,\cdot)$, we obtain that, for any $v\in H$, 
+\begin{equation*}
+(w,v) = \langle f, v\rangle_H.
+\end{equation*}
+\end{remark}
+
+\begin{theorem}
+Give an open bounded subset $U$ of $\mathbb{R}^n$, $f:U\to\mathbb{R}$. We consider the second order elliptic equation.
+\begin{equation*}
+\begin{cases}
+Lu(x)=f(x)\quad (x\in U),\\
+u(x)\equiv 0 \quad(x\in\partial U),
+\end{cases}
+\end{equation*}
+
+where $L$ is a second-order partial differential operator such that for any $u:U\to\mathbb{R}$, 
+\begin{equation}
+\label{eq:2.1}
+Lu = -\sum_{i,j=1}^n (a^{i,j}(x)u_{x_i})_{x_j}+\sum_{i=1}^nb^i(x)u_{x_i}+c(x)u,
+\end{equation}
+where for each $i,j=1,\cdots,n$, $a^{i,j},b^i,c:U\to\mathbb{R}$ belong to $L^\infty(U)$. 
+Furthermore, we pose the uniformly elliptic condition to $L$.\\
+\par Let us define $B(u,v):H_0^1(U)\times H_0^1(U)\to\mathbb{R}$ to be such that
+\begin{equation*}
+B(u,v) = \int_{U} \sum_{i,j=1}^n a^{i,j}u_{x_i}v_{x_j}+\sum_{i=1}^n b^iu_{x_i}v+cuv\:dx,
+\end{equation*}
+where $a^{i,j},b^i,c\in L^\infty(U)$.
+Then there exists $\alpha,\beta>0$ and $\gamma\geq 0$ such that,
+\begin{enumerate}[1).]
+\item $B(u,v)\leq\alpha\Vert u \Vert_{H_0^1(U)}\Vert v\Vert_{H_0^1(U)}$.
+\item $\beta\Vert u \Vert_{H_0^1(U)}^2 \leq B(u,u)+\gamma\Vert u \Vert_{L^2(U)}^2$.
+\end{enumerate}
+\label{LM_modified}
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+\vert B(u,v)\vert \leq & \sum_{i,j=1}^n \Vert a^{i,j}\Vert_{L^2(U)}\int_U \vert Du\vert\vert Dv\vert dx\\
+& +\sum_{i=1}^n\Vert b^i\Vert_{L^\infty(U)}\int_U\vert Du\vert\vert v\vert dx\\
+& + \Vert c\Vert_{L^\infty(U)}\int_U\vert u\vert\vert v\vert dx.
+\end{align*}
+We then use the Cauchy-Schwarz inequality to deduce that
+\begin{align*}
+\int_U \vert Du\vert\vert Dv\vert dx&\leq \Vert Du\Vert_{L^2(U)}\Vert Dv\Vert_{L^2(U)},\\\
+\int_U\vert Du\vert\vert v\vert dx &\leq \Vert Du\Vert_{L^2(U)}\Vert v\Vert_{L^2(U)},\\
+\int_U\vert u\vert\vert v\vert dx & \leq \Vert u\Vert_{L^2(U)}\Vert v\Vert_{L^2(U)}.
+\end{align*}
+Using Poincaré inequality, we derive that
+\begin{equation*}
+B(u,v)\leq \alpha \Vert u\Vert_{H_0^1(U)}\Vert v\Vert_{H_0^1(U)}.
+\end{equation*}
+\par We now prove the second claim. First we note that, by the uniformly elliptic condition, there is $\theta>0$ such that 
+\begin{align*}
+\theta\int_U\vert Du\vert^2&\leq\int_U\sum_{i,j=1}^n a^{i,j}u_{x_i}u_{x_j}dx,\\
+&\leq B(u,u)-\int_U\sum_{i=1}^nb^iu_{x_i}udx-\int_Ucu^2dx,\\
+& \leq B(u,u)+\sum_{i=1}^n\Vert b^i\Vert_{L^\infty(U)}\Vert Du\Vert_{L^2(U)}\Vert u\Vert_{L^2(U)}+\Vert c\Vert_{L^\infty(U)}\Vert u\Vert_{L^2(U)}^2.
+\end{align*}
+By AM-GM inequality, we obtain for any $x,y\leq 0$ and $\epsilon>0$, we have,
+\begin{equation*}
+xy\leq \varepsilon x^2+{\frac 1 {4\varepsilon}}y^2.
+\end{equation*}
+Let us choose $\varepsilon>0$ to be such that
+\begin{equation*}
+\varepsilon = {\frac \theta {2\sum_{i=1}^n\Vert b^i\Vert_{L^\infty(U)}}}.
+\end{equation*}
+Substituting this to the inequality, we get
+\begin{align*}
+\theta\int_U\vert Du\vert^2&\leq B(u,u)+{\frac \theta 2}\Vert u\Vert^2_{H^1_0(U)}+\gamma\Vert u\Vert_{L^2(U)}^2,\\
+{\frac 1 2}\theta\Vert u\Vert_{H^1_0(U)}^2 &\leq B(u,u)+\gamma\Vert u\Vert^2_{L^2(U)}.
+\end{align*}
+Let $\beta={\frac 1 2}$, we derived the claim.
+\end{proof}
+
+\begin{remark}
+In general the problem
+\begin{equation*}
+Lu=f,\quad u\in H_0^1(U),
+\end{equation*}
+is not solvable. 
+\end{remark}
+
+\begin{theorem}
+Let the second order elliptic operator $L$ with boundaries. There exists $\gamma\geq 0$ such that for any $\mu\geq\gamma$ and each $f\in\ L^2(U)$, there exists a unique solution $u\in H_0^1(U)$ such that
+\begin{equation*}
+B(u,v)+\mu\langle u,v\rangle_{H_0^1(U)}=\langle f, v\rangle_{H_0^1(U)}
+\end{equation*}
+holds for any $v\in H_0^1(U)$. 
+\end{theorem}
+
+\begin{proof}
+Let $\gamma\geq 0$ be as in Theorem \ref{LM_modified}. Now we define
+\begin{equation*}
+B_\mu(u,v) = B(u,v) +\mu\langle u,v\rangle_{L^2(U)}.
+\end{equation*}
+Then we have
+\begin{align*}
+B_\mu(u,v)&\leq \vert B(u,v)\vert+\mu\vert\langle u,v\rangle_{L^2(U)}\vert,\\
+&\leq\alpha\Vert u \Vert_{H_0^1(U)}\Vert v\Vert_{H_0^1(U)}+\mu \Vert u\Vert_{L^2(U)}\Vert v\Vert_{L^2(U)},\\
+& \leq (\alpha+\mu)\Vert u \Vert_{H_0^1(U)}\Vert v\Vert_{H_0^1(U)}.
+\end{align*}
+Thus satisfies the first condition for Theorem \ref{LM}. For the second part, we observe that
+\begin{align*}
+\beta\Vert u \Vert_{H_0^1(U)}^2&\leq B(u,v)+\gamma\Vert u \Vert_{H_0^1(U)}\Vert v\Vert_{H_0^1(U)}^2,\\
+& B_\mu(u,u)-\mu\Vert u\Vert_{L^2(U)}^2+\gamma\Vert u \Vert_{H_0^1(U)}\Vert v\Vert_{H_0^1(U)}^2,\\
+&\leq B_\mu(u,u).
+\end{align*}
+Therefore, there is a unique $u\in H_0^1(U)$, such that for any $v\in H_0^1(U)$, we have
+\begin{equation*}
+B_\mu(u,v) = \langle f,v\rangle_{L^2(U)}.
+\end{equation*}
+(In other words, the problem has a weak solution).
+\end{proof}
+
+\begin{remark}
+
+\end{remark}
+
+\end{document}
