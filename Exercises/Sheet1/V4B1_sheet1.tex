@@ -119,36 +119,46 @@ Let $(r,\theta)$ be the polar coordinate, then we have
 
 Suppose $u$ is in the form $u(r,\theta) = R(r)A(\theta)$. Then we have
 \begin{equation*}
-\Delta u = R''(r)+{\frac 1 r}R'(r)+{\frac 1 {r^2}}A''(\theta) = 0.
+\Delta u = (R''(r)+{\frac 1 r}R'(r))A(\theta)+R(r){\frac 1 {r^2}}A''(\theta) = 0.
 \end{equation*}
 
 Therefore, transforming the equation, we derive,
 \begin{equation*}
-rR''(r)+R'(r)=-A''(\theta).
+{\frac {r^2R''(r)+rR'(r)} {R(r)}}=-{\frac {A''(\theta)} {A(\theta)}}.
 \end{equation*}
 
 Each side has a different variable. Thus this is equal to a constant $\lambda$. First obviously
 \begin{equation*}
-A(\theta) = {\frac 1 2}\lambda\theta^2+a_1\theta+a_2,
+A(\theta) = a_1e^{\sqrt{\lambda}}+a_2e^{-\sqrt{\lambda}}.
 \end{equation*}
-for some constants, $a_1,a_2$. And for $R$ we observe that 
+for some constants, $a_1,a_2$. And for $R$,
 \begin{equation*}
-rR''(r)+R'(r) = (rR'(r))'.
+r^2R''(r)+rR'(r) =\lambda R(r)
 \end{equation*}
-Therefore, we derive
+By substituting $R(r) = r^\alpha$, we obtain
 \begin{equation*}
-R(r) = \lambda r+b_1\ln r+b_2,
+\alpha(\alpha-1)+\alpha = \lambda.
 \end{equation*}
-for some constants $b_1,b_2$.
+Thus $\lambda = \alpha^2$.
 
-We let $a_1,a_2,b_1,b_2=0$, then we have
+First assumer $\lambda \geq 0$ then 
 \begin{equation*}
-R'(r) = \lambda, A'(\theta) = \lambda\theta.
+R(r) = r^{\sqrt{\lambda}}, A(\theta) = a_1\cos(\sqrt{\lambda}\theta)+a_2\sin(\sqrt{\lambda}\theta).
 \end{equation*}
 
-Since $v(r,\theta) = (r\cos\theta,r\sin\theta)$. The boundary condition is 
+For the boundary condition, we have $r=1$ and 
+\begin{equation*}
+{\frac {\partial u} {\partial r}} = {\frac {\partial u} {\partial x}}\cos\theta+{\frac {\partial u} {\partial y}}\sin\theta.
+\end{equation*}
+Substituting this to the condition we get,
 \begin{align*}
-\lambda r\cos\theta+\lambda r \theta \sin\theta=\lambda r(\cos\theta+\theta\sin\theta).
+R'(1)A(\theta) = \beta R(1)A(\theta).
 \end{align*}
+
+Where $R(1) = 1,R'(1) = \sqrt{\lambda}$. Thus for $\beta>0$,
+
+\begin{equation*}
+R(r)A(\theta) = r^{\beta}(a_1\cos(\beta\theta)+a_2\sin\beta\theta).
+\end{equation*}
 
 \end{document}
