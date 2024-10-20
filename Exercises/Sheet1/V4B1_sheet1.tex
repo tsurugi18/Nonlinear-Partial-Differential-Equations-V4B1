@@ -54,7 +54,7 @@ Normalizing $v_n$, we obtain a sequence $(v_k)_{k\in\mathbb{N}}$ such that
 \end{equation*}
 Since $(v_k)_{k\in\mathbb{N}}$ is bounded, there is a subsequence $(v_{k_j})_{j\in\mathbb{N}}$ converging to some $u$. Then its derivative is $0$ by the assumption. Then $u=0$ but $\Vert u\Vert_{L^p(\Omega)}=1$. Thus a contradiction.
 
-\section*{Exercise 2}
+\section*{Exercise 4}
 
 \subsection*{(i)}
 
@@ -109,4 +109,46 @@ Therefore, $u$ is a constant. On the other hands, we have that
 u|_{\partial \Omega}=0.
 \end{equation*}
 This is a contradiction as $\Vert u\Vert_{H^1(\Omega)}=1$. We conclude that $B$ satisfies the conditions for Lax-Milgram theorem, therefore has a unique solution.
+
+\subsection*{(ii)}
+
+Let $(r,\theta)$ be the polar coordinate, then we have
+\begin{equation*}
+\Delta u = {\frac {\partial^2 u} {\partial r^2}}+{\frac 1 r}{\frac {\partial u} {\partial r}}+{\frac 1 {r^2}}{\frac {\partial^2 u} {\partial \theta^2}}.
+\end{equation*}
+
+Suppose $u$ is in the form $u(r,\theta) = R(r)A(\theta)$. Then we have
+\begin{equation*}
+\Delta u = R''(r)+{\frac 1 r}R'(r)+{\frac 1 {r^2}}A''(\theta) = 0.
+\end{equation*}
+
+Therefore, transforming the equation, we derive,
+\begin{equation*}
+rR''(r)+R'(r)=-A''(\theta).
+\end{equation*}
+
+Each side has a different variable. Thus this is equal to a constant $\lambda$. First obviously
+\begin{equation*}
+A(\theta) = {\frac 1 2}\lambda\theta^2+a_1\theta+a_2,
+\end{equation*}
+for some constants, $a_1,a_2$. And for $R$ we observe that 
+\begin{equation*}
+rR''(r)+R'(r) = (rR'(r))'.
+\end{equation*}
+Therefore, we derive
+\begin{equation*}
+R(r) = \lambda r+b_1\ln r+b_2,
+\end{equation*}
+for some constants $b_1,b_2$.
+
+We let $a_1,a_2,b_1,b_2=0$, then we have
+\begin{equation*}
+R'(r) = \lambda, A'(\theta) = \lambda\theta.
+\end{equation*}
+
+Since $v(r,\theta) = (r\cos\theta,r\sin\theta)$. The boundary condition is 
+\begin{align*}
+\lambda r\cos\theta+\lambda r \theta \sin\theta=\lambda r(\cos\theta+\theta\sin\theta).
+\end{align*}
+
 \end{document}
