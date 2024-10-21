@@ -1,47 +1,72 @@
 \documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{xfrac}
+\usepackage{enumitem}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{enumerate}
-\usepackage{bbm}
-\usepackage{lipsum}
-\usepackage{fancyhdr}
-\usepackage{calrsfs}
-\usepackage{tikz-cd} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\abs}[1]{\vert#1\vert}
+\newcommand{\systeme}[2]{\begin{equation}
+    \left\{
+    \begin{aligned}
+        &#1\\
+        &#2\\
+    \end{aligned}
+    \right.
+\end{equation}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\power}[2]{\left(#1\right)^{#2}}
+%L'accent aigu (é)
+%L'accent grave (à, è, ù)
+%L'accent circonflexe or "chapeau" (â, ê, î, ô, û)
+%La cédille (ç)
+%Le tréma (ë, ï, ü, ö)
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{exercise}{Exercise}
+\newtheorem{example}{Example}
+\DeclareMathOperator{\Aut}{\textup{Aut}}
+\DeclareMathOperator{\Frac}{\textup{Frac}}
+\DeclareMathOperator{\ev}{\textup{ev}}
+\DeclareMathOperator{\GL}{\textup{GL}}
+\DeclareMathOperator{\PGL}{\textup{PGL}}
+\DeclareMathOperator{\End}{\textup{End}}
+\DeclareMathOperator{\SO}{\textup{SO}}
+\DeclareMathOperator{\Sym}{\textup{Sym}}
+\DeclareMathOperator{\tr}{\textup{tr}}
+\DeclareMathOperator{\diag}{\textup{diag}}
+\DeclareMathOperator{\diam}{\textup{diam}}
+\DeclareMathOperator{\spt}{\textup{spt}}
+\DeclareMathOperator{\loc}{\textup{loc}}
+\DeclareMathOperator{\Lip}{\textup{Lip}}
+\DeclareMathOperator{\Div}{\textup{div}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
-\newtheorem{theorem}{Theorem}[section] 
-\newtheorem{proposition}{Proposition}[section] 
-\newtheorem{definition}{Definition}[section] 
-\newtheorem{lemma}{Lemma}[section] 
-\newtheorem{notation}{Notation}[section] 
-\newtheorem{remark}{Remark}[section] 
-\newtheorem{corollary}{Corollary}[section] 
-\newtheorem{terminology}{Terminology}[section] 
-\newtheorem{example}{Example}[section] 
 
-\DeclareMathOperator{\diam}{diam}
-\DeclareMathOperator{\Ker}{Ker}
-\DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Dom}{Dom}
-\DeclareMathOperator{\grad}{grad}
-\DeclareMathOperator{\Span}{Span}
-\DeclareMathOperator{\interior}{int}
-\DeclareMathOperator{\ind}{ind}
-\DeclareMathOperator{\supp}{supp}
-\DeclareMathOperator{\ob}{ob}
-\DeclareMathOperator{\Spec}{Spec}
-\DeclareMathOperator{\PreSh}{PreSh}
-\DeclareMathOperator{\Fun}{Fun}
-
-
-\title{Nonlinear Partial Differential Equations Exercise Sheet 1 Solutions}
-\author{So Murata}
-\date{2024/2025 Winter Semester - Uni Bonn}
+\title{Sheet 1 Solutions}
+\author{Toni Abi Aoun, So Murata}
+\date{}
 
 \begin{document}
+
 \maketitle
+
 \section*{Exercise 1}
 
 Suppose the inequality does not hold. Then for each $n$, there is $v_n$ such that
@@ -54,6 +79,158 @@ We can normalize $v_n$, we obtain a sequence $(u_k)_{k\in\mathbb{N}}$ in $K$ suc
 \end{equation*}
 This procedure is justified since $K$ is a cone.\\
 \par As $(u_k)_{k\in\mathbb{N}}$ is bounded, there is a subsequence $(u_{k_j})_{j\in\mathbb{N}}$ converging to some $u$ in $L^p(\Omega)$. Since $K$ is closed, $u\in K$. Then its derivative is $0$ and by the assumption, $u=0$ but $\Vert u\Vert_{L^p(\Omega)}=1$. Thus a contradiction.
+
+\textbf{Problem 1.2}\\
+Let $\Omega\subset\R^n$ be open with smooth boundary.\\
+(i) Let $f\in L^2(\Omega)$ and show that the problem 
+\[
+\begin{cases}
+    -\Delta w=f &\text{ in }\Omega,\\
+    w=0 &\text{ on }\partial \Omega
+\end{cases}
+\]
+has a unique weak solution $u\in H_0^1(\Omega)$ and that this solution satisfies for some constant $C>0$
+\[
+\Vert\nabla u\rVert_{L^2}\leqslant C\lVert f\rVert_{L^2}.
+\]
+\begin{proof}
+    To derive the weak formulation of this problem, consider $\varphi\in C_c^\infty(\Omega)$
+    \[
+    \int_{\Omega}(-\Delta w)\varphi dx=\int_{\Omega}\nabla w\cdot\nabla\varphi dx=\int_\Omega f\varphi dx.
+    \]
+    So the weak formulation of this problem is to find $u\in H_0^1(\Omega)$ such that
+    \[
+    \int_{\Omega}\nabla u\cdot\nabla\varphi dx=\int_{\Omega}f\varphi dx\quad\forall \varphi\in C_c^\infty(\Omega).
+    \]
+    To this end consider the bilinear form $B:H_0^1(\Omega)\times H_0^1(\Omega)\to\R$ given by
+    \[
+    B(u,v)=\int_{\Omega}\nabla u\cdot\nabla vdx \quad\forall u,v\in H_0^1(\Omega),
+    \]
+    and the linear functional $f^*:H_0^1(\Omega)\to\R$ given by
+    \[
+    \langle f^*,v\rangle=\int_{\Omega}fvdx\quad\forall v\in H_0^1(\Omega).
+    \]
+    $B$ is clearly bilinear and  $\forall u,v\in H_0^1(\Omega)$, we have
+    
+    \begin{gather}
+        |B(u,v)|=\left|\int_{\Omega}\nabla u\cdot \nabla vdx\right|\leqslant \lVert \nabla u\rVert_{L^2}\lVert \nabla v\rVert_{L^2}=\lVert u\rVert_{H_0^1}\lVert v\rVert_{H_0^1},\\
+        |B(u,u)|=\int_{\Omega}|\nabla u|^2dx=\lVert u\rVert_{H_0^1}^2.
+    \end{gather}
+    This proves that $B$ is bounded and coercive.\\
+    Similarly, for all $v\in H_0^1(\Omega)$, we have
+    \[
+    |\langle f^*,v\rangle|=\left|\int_{\Omega}fvdx\right|\leqslant \lVert f\rVert_{L^2}\lVert v\rVert_{L^2}\leqslant C_{Poi}\lVert f\rVert_{L^2}\lVert v\rVert_{H_0^1},
+    \]
+    where $C_{Poi}$ is the constant coming from Poincare's inequality, this proves that $f^*$ is a continuous linear functional on $H_0^1(\Omega)$.\\
+    Since $H_0^1(\Omega)$ is a Hilbert space, we can apply Lax-Milgram's theorem to conclude that there exists a unique $u\in H_0^1(\Omega)$ such that 
+    \[
+    B(u,v)=\int_{\Omega}\nabla u\cdot\nabla vdx=\int_{\Omega}fvdx=\langle f^*,v\rangle \quad\forall v\in H_0^1(\Omega).
+    \]
+    This weak solution further satisfies
+    \[
+    \lVert \nabla u\rVert_{L^2}^2=\int_{\Omega}|\nabla u|^2dx=\int_{\Omega}fudx\leqslant \lVert f\rVert_{L^2}\lVert u\rVert_{L^2}\leqslant C_{Poi}\lVert f\rVert_{L^2}\lVert \nabla u\rVert_{L^2},
+    \]
+    which in turns yields
+    \[
+    \lVert \nabla u\rVert_{L^2}\leqslant C_{Poi}\lVert f\rVert_{L^2}.
+    \]
+\end{proof}
+(ii) Let $f:\R\to\R$ be Lipschitz continuous. Show that
+\[
+\begin{cases}
+    -\Delta u=f(u)&\text{ in }\Omega,\\
+    u=0 &\text{ on }\partial \Omega
+\end{cases}
+\]
+has a unique weak solution $u\in H_0^1(\Omega)$ provided that the Lipschitz constant of $f$ is sufficiently small.
+\begin{proof}
+    Since $f$ is Lipschtiz, for all $x\in\R$ we have
+    \[
+    |f(x)|\leqslant |f(0)|+\Lip(f)|x|.
+    \]
+    From this we deduce that for all $v\in L^2(\Omega)$, we have $f\circ v\in L^2(\Omega)$ since $\Omega$ is bounded (therefore of finite measure, so constant function are square integrable).\\
+    Now using question (i), we can define the map $T:L^2(\Omega)\to L^2(\Omega)$, where for any $v\in L^2(\Omega)$, we have $T(v)$ is the unique weak solution in $H_0^1(\Omega)$ to the problem
+    \[
+    \begin{cases}
+        -\Delta u=f(v)&\text{ in }\Omega,\\
+        u=0&\text{ on }\partial\Omega.
+    \end{cases}
+    \]
+    Given $v,w\in L^2(\Omega)$, we have that $T(v)-T(w)$ is the unique weak solution in $H_0^1(\Omega)$ to the problem
+    \[
+    \begin{cases}
+        -\Delta u=f(v)-f(w)&\textup{ in }\Omega,\\
+        u=0&\text{ on }\partial\Omega.
+    \end{cases}
+    \]
+    Using the estimate of question $(i)$, we get
+    \[
+    \lVert\nabla T(v)-\nabla T(w)\rVert_{L^2}\leqslant C_{Poi}\lVert f(v)-f(w)\rVert_{L^2}\leqslant C_{Poi}\Lip(f)\lVert v-w\rVert_{L^2}.
+    \]
+    Using Poincare's inequality we thus get
+    \[
+    \lVert T(v)-T(w)\rVert_{L^2}\leqslant C_{Poi}\lVert \nabla T(v)-\nabla T(w)\rVert_{L^2}\leqslant C_{Poi}^2\Lip(f)\lVert v-w\rVert_{L^2}.
+    \]
+    $L^2(\Omega)$ is a Hilbert space thus a complete metric space. If $C_{Poi}^2\Lip(f)<1$, we can apply Banach's fixed point theorem, to deduce that there is a unique fixed point $u\in L^2(\Omega)$. Since $T(v)\in H_0^1(\Omega)$ for all $v\in L^2(\Omega)$, we get that $u=T(u)\in H_0^1(\Omega)$.
+\end{proof}
+\textbf{Problem 1.3}\\
+Let $\Omega\subset\R^n$ be open and bounded with smooth boundary.\\
+Recall the following version of the maximum/minimum principle: let $b,c\in C^0(\overline{\Omega}),\; c\geqslant 0$ and assume that $u\in C^2(\Omega)\cap C^0(\overline{\Omega})$ satsifies
+\[
+-\Delta u+b\cdot\nabla u+cu\geqslant 0 \text{ in }\Omega.
+\]
+Then 
+\[
+\min_{\overline{\Omega}}u\geqslant -\max_{\partial\Omega}u_-.
+\]
+(i) Show that the unique solution of 
+\[
+\begin{cases}
+    \Delta u=u^3 &\text{ in }\Omega,\\
+    u=0 &\text{ on }\partial\Omega
+\end{cases}
+\]
+in $C^2(\Omega)\cap C^0(\overline{\Omega})$ is $u\equiv 0$.
+\begin{proof}
+    Set $b=0$ and $c=u^2\geqslant 0$, then $b,c\in C^0(\overline{\Omega})$ and we have
+    \[
+    -\Delta u+u^3=-\Delta u+b\cdot \nabla u+cu=0 \text{ in }\Omega.
+    \]
+    Using the maximum/minimum principle, we get that 
+    \[
+    \min_{\overline{\Omega}}u\geqslant-\max_{\partial\Omega}u_-=0.
+    \]
+    By applying the same reasoning to $-u$, we deduce that
+    \[
+    \max_{\overline{\Omega}}u=-\min_{\overline{\Omega}}(-u)\leqslant -\max_{\partial\Omega}(-u)_-=\min_{\partial\Omega}-u_+=0.
+    \]
+    Combining these two inequalities gives that $u\equiv 0$.
+\end{proof}
+(ii) Show that the problem
+\[
+\begin{cases}
+    \Delta u=u^2&\text{ in }\Omega,\\
+    u\geqslant 0 &\text{ in }\Omega,\\
+    u=0&\text{ on }\partial\Omega
+\end{cases}
+\]
+has a unique solution in $C^2(\Omega)\cap C^0(\overline{\Omega})$. Is the same true if the constraint $u\geqslant 0$ is dropped?
+\begin{proof}
+    Set $b=0$ and $c=u\geqslant 0$, then $b,c\in C^0(\overline{\Omega})$ and we have
+    \[
+    -\Delta(-u)+u(-u)=-\Delta(-u) +b\cdot\nabla(-u)+c(-u)=0\text{ in }\Omega.
+    \]
+    Using the maximum/minimum principle, we get that 
+    \[
+    \min_{\overline{\Omega}}(-u)\geqslant-\max_{\partial \Omega}(-u)_-,
+    \]
+    which is equivalent to
+    \[
+    \max_{\overline{\Omega}} u\leqslant \max_{\partial\Omega}u_+=0.
+    \]
+    Combined with the constraint $u\geqslant 0$ in $\Omega$, we get that the only solution in $C^2(\Omega)\cap C^0(\overline{\Omega})$ to the problem is $u\equiv 0$.\\
+   
+\end{proof}
 
 \section*{Exercise 4}
 
@@ -161,5 +338,7 @@ Where $R(1) = 1,R'(1) = \sqrt{\lambda}$. Thus for $\beta>0$,
 \begin{equation*}
 R(r)A(\theta) = r^{\beta}(a_1\cos(\beta\theta)+a_2\sin\beta\theta).
 \end{equation*}
+
+
 
 \end{document}
