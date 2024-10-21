@@ -78,7 +78,17 @@ We can normalize $v_n$, we obtain a sequence $(u_k)_{k\in\mathbb{N}}$ in $K$ suc
 \Vert Du_k\Vert_{L^p(\Omega)} < {\frac 1 n}.
 \end{equation*}
 This procedure is justified since $K$ is a cone.\\
-\par As $(u_k)_{k\in\mathbb{N}}$ is bounded, there is a subsequence $(u_{k_j})_{j\in\mathbb{N}}$ converging to some $u$ in $L^p(\Omega)$. Since $K$ is closed, $u\in K$. Then its derivative is $0$ and by the assumption, $u=0$ but $\Vert u\Vert_{L^p(\Omega)}=1$. Thus a contradiction.
+\par As $(u_k)_{k\in\mathbb{N}}$ is bounded, there is a subsequence $(u_{k_j})_{j\in\mathbb{N}}$ converging to some $u$ in $L^p(\Omega)$.
+\begin{align*}
+\int_U {\frac {\partial u_{n_k}} {\partial x_i}}\varphi dx &= -\int_Uu_{n_k}{\frac {\partial \varphi} {\partial x_i}}dx,\\
+\left\vert \int_U {\frac {\partial u_{n_k}} {\partial x_i}}\varphi dx\right\vert&<{\frac A {n_k}},
+\end{align*}
+for some constant $A$ and a test function $\varphi$ since $U$ is bounded. By Fatou's lemma, we have that for each $\varphi$
+\begin{equation*}
+\int_U u {\frac {\partial\varphi} {\partial x_i}}dx = 0.
+\end{equation*}
+
+Therefore, $0$ is a weak derivative of $u$ thus $u$ is convergent in $W^{1,p}(U)$. Since $K$ is closed we have $u\in K$. But $Du=0$ implies that $u=0$. This is a contradiction. Thus the inequality holds.
 
 \textbf{Problem 1.2}\\
 Let $\Omega\subset\R^n$ be open with smooth boundary.\\
@@ -229,7 +239,36 @@ has a unique solution in $C^2(\Omega)\cap C^0(\overline{\Omega})$. Is the same t
     \max_{\overline{\Omega}} u\leqslant \max_{\partial\Omega}u_+=0.
     \]
     Combined with the constraint $u\geqslant 0$ in $\Omega$, we get that the only solution in $C^2(\Omega)\cap C^0(\overline{\Omega})$ to the problem is $u\equiv 0$.\\
-   
+   If the constraint $u\geqslant 0$ is dropped, we get the equation
+   \[
+   \begin{cases}
+       \Delta u=u^2&\text{ in }\Omega,\\
+       u=0&\text{ on }\partial\Omega.
+   \end{cases}
+   \]
+   This problem does not always have a unique solution. Consider the case $n=1$, then the equation reduces to 
+   \[
+   \begin{cases}
+        u''=u^2&\text{ in }\Omega,\\
+        u=0&\text{ on }\partial\Omega.
+   \end{cases}
+   \]
+   First consider the Cauchy problem with initial value
+   \[
+   \begin{cases}
+        u''(x)=u^2(x)&x\geqslant 0,\\
+        u(0)=0,\; u'(0)=-1.
+   \end{cases}
+   \]
+   By the Cauchy-Lipschitz theorem, there is a maximal solution $u$ which is $C^2$ on some open interval $I\subset\R$ containing $0$.\\
+   Since $u''(x)=u^2(x)\geqslant 0$ for all $x\in I$, the solution $u$ is convex. We know that $u(0)=0$ and $u'(0)=-1$. This implies that $u$ is decreasing on some interval $(0,\delta)$ for some $\delta>0$. We claim that there exists $x_0>0$ such that $u(x_0)=0$. Suppose this were not the case, then since $u$ is convex, it is necessarily non increasing on $I\cap (0,\infty)$ (if this were not the case, since $u'$ is non decreasing, we would have $u'(x)>0$ for some $x>0$, which in turn would imply $\lim_{x\to\sup I}u(x)=+\infty$). Now there are two possibilities, either $\lim_{x\to\sup I}u(x)=-\infty$ or $\lim_{x\to\sup I}u(x)=l$ for some $l<0$. In either case, using $u''=u^2$ in $I$, this implies that $u''(x)>\epsilon$ for all $x\in I$ large enough and for some $\epsilon>0$. But this would imply that $\lim_{x\to\sup I}u'(x)=+\infty$ which contradicts the fact that $u$ is non increasing.\\
+   This proves that there exists $x_0>0$ such that $u(x_0)=0$. By taking $\Omega=(0,x_0)$, the above $u$ is a non zero solution to
+   \[
+   \begin{cases}
+       u''(x)=u^2(x) & x\in(0,x_0),\\
+       u(x)=0&x\in\{0,x_0\}.
+   \end{cases}
+   \]
 \end{proof}
 
 \section*{Exercise 4}

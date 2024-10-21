@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.13)  21 OCT 2024 19:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.13)  21 OCT 2024 21:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -739,22 +739,17 @@ al/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
 4/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2024/texmf-di
 st/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2024/texmf-dist/fonts/e
 nc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm
--mathex.enc}] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 230--232
+-mathex.enc}] [2] [3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 303--305
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 264--266
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 275--277
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 314--316
 
  []
 
-[5] [6] (./V4B1_sheet1.aux)
+[6] [7] (./V4B1_sheet1.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -767,7 +762,7 @@ Here is how much of TeX's memory you used:
  38430 multiletter control sequences out of 15000+600000
  613590 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,9n,107p,503b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 98i,11n,107p,928b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
 cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texliv
 e/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/tex
@@ -784,10 +779,10 @@ lmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbo
 ls/msam10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfon
 ts/symbols/msbm7.pfb>
-Output written on V4B1_sheet1.pdf (6 pages, 251925 bytes).
+Output written on V4B1_sheet1.pdf (7 pages, 260636 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
+ 124 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
