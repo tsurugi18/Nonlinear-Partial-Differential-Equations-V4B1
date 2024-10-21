@@ -110,6 +110,13 @@ When $k=0$ we have $W^{0,p}(U) = L^p(U)$.
 \end{remark}
 
 \begin{definition}
+Given an open subset $U$ of $\mathbb{R}^n$, we define $H^k_{\mathbf{loc}}(U)$ to be such that 
+\begin{equation*}
+H^k_{\mathbf{loc}}(U) =\{u:U\to\mathbb{R}\:|\: \text{For any compact set $V\subset U$, we have }u\in H^2(V)\}.
+\end{equation*}
+\end{definition}
+
+\begin{definition}
 The essential supremum of a functional $f:U\to\mathbb{R}$ is 
 \begin{equation*}
 \esssup_U(f)\inf\{c\in\mathbb{R}\:|\: \forall x\in U, f(x)\leq c\}.
@@ -585,7 +592,81 @@ B_\mu(u,v) = \langle f,v\rangle_{L^2(U)}.
 \end{proof}
 
 \begin{remark}
-
+We can have $\gamma=0$ for some particular operators. For instance, 
+\begin{equation*}
+Lu=\sum_{i,j=1}^n(a^{i,j}u_{x_i})_{x_j}, \quad (b^i,c=0),
+\end{equation*}
+which we assume it to be uniformly elliptic.\\
+\par We now use Lax-Milgram theorem, by defining
+\begin{align*}
+B(u,v) = \sum_{i,j=1}^n \int_U a^{i,j}u_{x_i}u_{x_j}.
+\end{align*}
+By the uniformly elliptic condition, there is $\theta>0$ such that
+\begin{equation*}
+B(u,u)\geq \theta\Vert u \Vert^2_{H_0^1(U)},
+\end{equation*}
+for any $u\in H_0^1(U)$.
 \end{remark}
 
+\begin{remark}
+In general, there might be a homogeneous solution to the given problem. (ie. a solution $u$ such that $Lu=0$). For example, in the case $n=1$, we have
+\begin{equation*}
+Lu = {\frac {\partial^2u} {\partial x^2}} - u \quad (0,\pi).
+\end{equation*}
+Then the problem
+\begin{equation*}
+\begin{cases}
+Lu = f \quad ((0,\pi)),\\
+u(0),u(\pi)=0.
+\end{cases}
+\end{equation*}
+is not solvable. But when $f=0$, there is a non-trivial homogeneous solution,
+\begin{equation*}
+\psi(x) = K\sin x
+\end{equation*} 
+\end{remark}
+
+\subsection{Regularity theory (Basic Theory, $H^2(U)$ Theory)}
+
+Suppose we have a problem
+\begin{equation*}
+-\Delta u=f,
+\end{equation*}
+where $u,f\in \mathcal{C}^\infty_C(\mathbb{R}^n)$ and also $f\in L^2(\mathbb{R}^n)$. \\
+
+\begin{lemma}
+Let $U\subset\mathbb{R}^n$ be an open bounded set and $L$ be a second order elliptic operator such that
+\begin{equation*}
+Lu = -\sum_{i,j=1}^n (a^{i,j}u_{x_i})_{x_j},
+\end{equation*}
+where each $a^{i,j}\in \mathcal{C}^1(U)$. Then we have the following implication.
+\begin{equation*}
+
+\end{equation*}
+\end{lemma}
+
+\begin{theorem}[Interior Regularity]
+Let $U\subset \mathbb{R}^n$ be an open bounded set and $u\in H_0^1(U)$. Given the second order elliptic operator
+\begin{equation*}
+Lu = -\sum_{i,j=1}^n(a^{i,j}u_{x_i})_{x_j}+\sum_{i=1}^n b^i(x)u_{x_i}+cu,
+\end{equation*}
+which is 
+\begin{enumerate}[i).]
+\item uniformly elliptic with constant $\theta$,
+\item each $a^{i,j}\in\mathcal{C}^1(U)$,
+\item each $b^i$ and $c$ are in $L^\infty (U)$,
+\item $f\in L^2(U)$. 
+\end{enumerate}
+
+Suppose that $u\in H^1(U)$ is a weak solution of the problem
+\begin{equation*}
+Lu = f (\text{in }U).
+\end{equation*}
+Then $u$ satisfies the following.
+\begin{enumerate}[1).]
+\item $u\in H_{\mathbf{loc}}^2(U)$.
+\item For any compact subset $V\subset U$, $\Vert u\Vert_{H^2(V)}\leq C(\Vert f\Vert_{L^2(U)}+\Vert u\Vert_{L^2(U)})$ for some $C>0$.
+\item If $u$ is bounded in $L^2(V)$ then there is a subset such that $Du, D^2u$ are bounded.
+\end{enumerate}
+\end{theorem}
 \end{document}
