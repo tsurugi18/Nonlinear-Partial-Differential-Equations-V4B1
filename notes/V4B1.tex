@@ -640,9 +640,7 @@ Let $U\subset\mathbb{R}^n$ be an open bounded set and $L$ be a second order elli
 Lu = -\sum_{i,j=1}^n (a^{i,j}u_{x_i})_{x_j},
 \end{equation*}
 where each $a^{i,j}\in \mathcal{C}^1(U)$. Then we have the following implication.
-\begin{equation*}
 
-\end{equation*}
 \end{lemma}
 
 \begin{theorem}[Interior Regularity]
@@ -660,13 +658,19 @@ which is
 
 Suppose that $u\in H^1(U)$ is a weak solution of the problem
 \begin{equation*}
-Lu = f (\text{in }U).
+Lu = f \quad (\text{in }U).
 \end{equation*}
+
 Then $u$ satisfies the following.
 \begin{enumerate}[1).]
 \item $u\in H_{\mathbf{loc}}^2(U)$.
-\item For any compact subset $V\subset U$, $\Vert u\Vert_{H^2(V)}\leq C(\Vert f\Vert_{L^2(U)}+\Vert u\Vert_{L^2(U)})$ for some $C>0$.
+\item For any open subset $V\subset U$ which is compactly contained in $U$ (ie. $\overline{V}\subset U$), $\Vert u\Vert_{H^2(V)}\leq C(\Vert f\Vert_{L^2(U)}+\Vert u\Vert_{L^2(U)})$ for some $C>0$.
 \item If $u$ is bounded in $L^2(V)$ then there is a subset such that $Du, D^2u$ are bounded.
 \end{enumerate}
 \end{theorem}
+
+\begin{corollary}
+\begin{equation*}
+
+\end{corollary}
 \end{document}
