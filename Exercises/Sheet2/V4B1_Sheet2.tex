@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{xfrac}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\abs}[1]{\vert#1\vert}
+\newcommand{\systeme}[2]{\begin{equation}
+    \left\{
+    \begin{aligned}
+        &#1\\
+        &#2\\
+    \end{aligned}
+    \right.
+\end{equation}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\power}[2]{\left(#1\right)^{#2}}
+%L'accent aigu (é)
+%L'accent grave (à, è, ù)
+%L'accent circonflexe or "chapeau" (â, ê, î, ô, û)
+%La cédille (ç)
+%Le tréma (ë, ï, ü, ö)
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{exercise}{Exercise}
+\newtheorem{example}{Example}
+\DeclareMathOperator{\Aut}{\textup{Aut}}
+\DeclareMathOperator{\Frac}{\textup{Frac}}
+\DeclareMathOperator{\ev}{\textup{ev}}
+\DeclareMathOperator{\GL}{\textup{GL}}
+\DeclareMathOperator{\PGL}{\textup{PGL}}
+\DeclareMathOperator{\End}{\textup{End}}
+\DeclareMathOperator{\SO}{\textup{SO}}
+\DeclareMathOperator{\Sym}{\textup{Sym}}
+\DeclareMathOperator{\tr}{\textup{tr}}
+\DeclareMathOperator{\diag}{\textup{diag}}
+\DeclareMathOperator{\diam}{\textup{diam}}
+\DeclareMathOperator{\spt}{\textup{spt}}
+\DeclareMathOperator{\loc}{\textup{loc}}
+\DeclareMathOperator{\Lip}{\textup{Lip}}
+\DeclareMathOperator{\Div}{\textup{div}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Sheet 2 Solutions}
+\author{Toni Abi Aoun, So Murata}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Exercise 2.1}
+
+\subsection*{2.1.i}
+
+For a smooth function $u\in C^\infty(\mathbb{R}^n)$ which also belongs to $H^k(\mathbb{R}^n)$, we derive
+\begin{equation*}
+\widehat{D^\alpha u} = (iy)^\alpha \hat{u}.
+\end{equation*}
+
+Since $D^\alpha u\in L^2(\mathbb{R}^n)$, we derive the right hand side $(iy)^\alpha \hat{u}$ is also in $L^2(\mathbb{R}^n)$ for each $\alpha$. by choosing $\alpha = (k,0,\cdots,0),(0,k,\cdots,0),\cdots,(0,0,\cdots,k)$, we derive
+\begin{equation*}
+\int_{\mathbb{R}^n}\vert y\vert^{2k}\vert\hat{u}\vert^2 dy \leq \Vert D^k u\Vert^2_{L^2(\mathbb{R}^n)}.
+\end{equation*}
+Since Fourier transform is an isometry we derive and there are other norms of derivatives added,
+\begin{equation*}
+\int_{\mathbb{R}^n}1+\vert y\vert^{2k}\vert\hat{u}\vert^2dx\leq \Vert u\Vert^2_{H^k}.
+\end{equation*}
+We have for $a,b>0$ and $s>0$, $(a+b)^s\leq 2^s(a^s+b^s)$.
+We conclude that $(1+\vert y\vert^{k})\hat{u}$ is in $L^2(\mathbb{R}^n)$. \\
+\par On the other hand $(1+\vert y\vert^{k})\hat{u}\in L^2(\mathbb{R}^n)$ then for $|\alpha|\leq k$, we have 
+\begin{equation}
+\label{L2_derivative}
+\Vert (iy)^\alpha\hat{u}\Vert_{L^2} \leq \int_{\mathbb{R}^n}\Vert y\Vert^{2|\alpha|}|\hat{u}|^2 dy\leq C\Vert(1+\vert y\vert^{k})^2\hat{u}\Vert_{L^2(\mathbb{R}^n)}.
+\end{equation}
+Let us denote $u_\alpha = {\frac 1 {2\pi}}\int_{\mathbb{R}^n}((iy)^\alpha\hat{u})e^{iyx}dy$ be the image of the inverse fourier transform of $((iy)^\alpha\hat{u})$. Then
+
+\begin{equation*}
+\int_{\mathbb{R}^n}(D^\alpha\varphi)\overline{u}dx=\int_{\mathbb{R}^n}\widehat{D^\alpha\varphi}\overline{\hat{u}}dx = \int_{\mathbb{R}^n}(iy)^\alpha\hat{\varphi}\overline{\hat{u}}dx =(-1)^{|\alpha|} \int_{\mathbb{R}^n}\varphi u_\alpha dx.
+\end{equation*}
+
+By Equation \ref{L2_derivative}, $u_\alpha$ is in $L^2$, therefore this is a weak derivative of $u$ and $u$ is in $H^k$.
+\section*{Exercise 2.2}
+
+\begin{equation*}
+Lu = -\sum_{i=1}^n{\frac {\partial^2 u} {\partial x_i^2}}.
+\end{equation*}
+
+We let $B_0[u,v] = -\sum_{i=1}^n \partial_{x_i}u\partial_{x_i}v.$ 
+
+\subsection{Exercise 2.2.i}
+
+With Poincare inequality, we see that
+\begin{equation*}
+\Vert u\Vert _{H^1_0(\mathbb{R})^n}\leq C\Vert Du\Vert_{H^1_0(\mathbb{R})^n} \Rightarrow {\frac 1 {C^2}}\Vert u\Vert_{H^1_0(\mathbb{R})^n}^2 \leq \Vert Du\Vert_{H^1_0(\mathbb{R})^n}^2=B_0[u,u].
+\end{equation*}
+also
+\begin{equation*}
+\left|B_0[u,v]\right| \leq \Vert u\Vert_{H^1_0(\mathbb{R})^n}\Vert v\Vert_{H^1_0(\mathbb{R})^n}
+\end{equation*}
+follows from Cauchy-Schwarz inequality. Thus $\gamma=0$ for the existence of weak solutions by Lax-Milgram. We derived from $c>0$ that the equation stated in the sheet has a solution in $H^1_0(\mathbb{R}^n)$ thus in $H^1(\mathbb{R}^n)$.
+
+\subsection*{2.2.ii}
+
+By taking the fourier transform of the equation we get
+\begin{equation*}
+\sum_{i=1}^n y_i^2\hat{u}+c\hat{u} = \hat{f}.
+\end{equation*}
+Since $u\in L^2(\mathbb{R}^2)$ so $(1-c)u$ is in $L^2(\mathbb{R}^n)$. We conclude that $(1+|y|^2)\hat{u}$ is in $L^2(\mathbb{R}^n)$. Therefore, $u$ is in $H^2(\mathbb{R}^n)$. 
+\subsection*{2.2.iii}
+Suppose the statement is true for $k-1$.\\
+\par By assumption we have that $(1+|y|^k)\hat{f}\in L^2(\mathbb{R}^n)$. This means that 
+\begin{equation*}
+(1+|y|^k)(c+|y|^2)\hat{u}\in L^2(\mathbb{R}^n).
+\end{equation*}
+By the induction hypothesis,
+$|y|^k\hat{u}, |y|^2\hat{u}$ are both in $L^2(\mathbb{R}^n)$. Thus we conclude that
+\begin{equation*}
+(1+|y|^{k+2})\hat{u}$ is in $L^2(\mathbb{R}^n)$, which completes the claim.
+\end{equation*}
+\end{document}
+
+
