@@ -1,0 +1,144 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{xfrac}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\abs}[1]{\vert#1\vert}
+\newcommand{\systeme}[2]{\begin{equation}
+    \left\{
+    \begin{aligned}
+        &#1\\
+        &#2\\
+    \end{aligned}
+    \right.
+\end{equation}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\power}[2]{\left(#1\right)^{#2}}
+%L'accent aigu (é)
+%L'accent grave (à, è, ù)
+%L'accent circonflexe or "chapeau" (â, ê, î, ô, û)
+%La cédille (ç)
+%Le tréma (ë, ï, ü, ö)
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{exercise}{Exercise}
+\newtheorem{example}{Example}
+\DeclareMathOperator{\Aut}{\textup{Aut}}
+\DeclareMathOperator{\Frac}{\textup{Frac}}
+\DeclareMathOperator{\ev}{\textup{ev}}
+\DeclareMathOperator{\GL}{\textup{GL}}
+\DeclareMathOperator{\PGL}{\textup{PGL}}
+\DeclareMathOperator{\End}{\textup{End}}
+\DeclareMathOperator{\SO}{\textup{SO}}
+\DeclareMathOperator{\Sym}{\textup{Sym}}
+\DeclareMathOperator{\tr}{\textup{tr}}
+\DeclareMathOperator{\diag}{\textup{diag}}
+\DeclareMathOperator{\diam}{\textup{diam}}
+\DeclareMathOperator{\spt}{\textup{spt}}
+\DeclareMathOperator{\loc}{\textup{loc}}
+\DeclareMathOperator{\Lip}{\textup{Lip}}
+\DeclareMathOperator{\Div}{\textup{div}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Sheet 3 Solutions}
+\author{Toni Abi Aoun, So Murata}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{3.2}
+
+By the assumption, we have
+\begin{equation}
+\label{weak_sol}
+\int_{\mathbb{R}^n} Du\cdot Dv dx = \int_{\mathbb{R}^n} fvdx - \int_{\mathbb{R}^n}c(u)vdx,
+\end{equation}
+
+for any $v\in H^1(\mathbb{R}^n)$. The above integration is defined since $u$ is compactly supported and we can choose large enough ball that contains the support of $u$ and integrate these expressions over it.\\
+\par Let us now define 
+\begin{equation*}
+v = -D_k^{-h}(D_k^hu)
+\end{equation*}
+for sufficiently small $h$. Substitute this to Equation \ref{weak_sol}, we get
+\begin{equation*}
+-\int_{\mathbb{R}^n} Du\cdot D(D_k^{-h}(D_k^hu))dx = -\int_{\mathbb{R}^n} fD_k^{-h}(D_k^h u)dx + \int_{\mathbb{R}^n}c(u)D_k^{-h}(D_k^hu)dx.
+\end{equation*}
+
+By applying the integration by parts of difference quotients, we derive
+\begin{equation*}
+-\int_{\mathbb{R}^n} Du\cdot D(D_k^{-h}(D_k^hu))dx = \int_{\mathbb{R}^n} D_k^{-h}Du\cdot (D_k^hDu))dx=\Vert D_k^h(Du)\Vert^2_{L^2(\mathbb{R}^n)}.
+\end{equation*}
+
+By Cauchy inequality with $\varepsilon$ and the inequality between difference quotients and weak-derivatives, we get
+\begin{align*}
+\left|-\int_{\mathbb{R}^n} fD_k^{-h}(D_k^h u)dx\right| & \leq \int_{\mathbb{R}^n} |f||D_k^{-h}(D_k^h u)|dx\\
+&\leq(\int_{\mathbb{R}^n} |f|^2dx)(\int_{\mathbb{R}^n}|D_k^{-h}(D_k^h u)|^2dx)\\
+& \leq {\frac C \varepsilon}(\int_{\mathbb{R}^n} |f|^2dx)+\varepsilon(\int_{\mathbb{R}^n}|D_k^{-h}(D_k^h u)|^2dx)\\
+& \leq {\frac C \varepsilon}(\int_{\mathbb{R}^n} |f|^2dx)+C_1\varepsilon(\int_{\mathbb{R}^n}|D_k^{h}(Du)|^2dx)
+\end{align*}
+Also we observe that by the smoothness of $c$,
+\begin{equation*}
+c(u)(x) = \int_0^{u(x)}c'(t)dt \Rightarrow |c(u)(x)|\leq |u(x)|\cdot\Vert c'\Vert_{L^\infty([0,u(x)])}.
+\end{equation*}
+With this we have the inequality and the same argument appeared previously we get 
+\begin{equation*}
+|\int_{\mathbb{R}^n}c(u)D_k^{-h}(D_k^hu)dx|\leq C_2\varepsilon\int_{\mathbb{R}^n}|D_k^h(Du)|^2dx+{\frac C \varepsilon}\Vert c'\Vert_{L^\infty([0,u(x)])}\Vert u\Vert^2_{L^2}.
+\end{equation*}
+Combining these inequalities and the rewriting the expression of the left hand side we get
+\begin{equation*}
+\Vert D_k^h(Du)\Vert^2_{L^2(\mathbb{R}^n)}\leq (C_1+C_2)\varepsilon\int_{\mathbb{R}^n}|D_k^h(Du)|^2dx + {\frac C \varepsilon}(\int_{\mathbb{R}^n} |f|^2dx) +{\frac C \varepsilon}\Vert c'\Vert_{L^\infty([0,u(x)])}\Vert u\Vert^2_{L^2}
+\end{equation*}
+Let $\varepsilon = {\frac 1 {2(C_1+C_2)}}$, then we get
+\begin{equation*}
+{\frac 1 2}\Vert D_k^h(Du)\Vert^2_{L^2(\mathbb{R}^n)}\leq{\frac C \varepsilon}(\int_{\mathbb{R}^n} |f|^2dx) +{\frac C \varepsilon}\Vert c'\Vert_{L^\infty([0,u(x)])}\Vert u\Vert^2_{L^2}
+\end{equation*}
+This holds for each $k=1,\cdots,n$, thus we conclude that for some constant $K$, the following inequality holds,
+\begin{equation*}
+\Vert D^hu\Vert_{L^2(\mathbb{R}^n)}\leq K((\int_{\mathbb{R}^n} |f|^2dx) +\Vert c'\Vert_{L^\infty([0,u(x)])}\Vert u\Vert^2_{L^2}).
+\end{equation*}
+Therefore $Du\in H^1(\mathbb{R}^n)$, therefore $u\in H^2(\mathbb{R}^n)$. 
+
+\section*{Exercise 3.3}
+Since $\phi$ is smooth, we have $\phi(u)\in H^1(U)$. Let us now define a bilinear form
+\begin{equation*}
+B[u,v] = \sum_{i,j}^n \int_{U} A_{i,j}\partial_{x_i}u\partial_{x_j}v.
+\end{equation*}
+Let $v\in\mathcal{C}^\infty_C(U)$ and $v\geq0$, then 
+\begin{align*}
+B[\phi(u),v] & = \sum_{i,j}^n \int_{U} A_{i,j}\partial_{x_i}\phi(u)\partial_{x_j}v\\
+& = \sum_{i,j}^n \int_{U} A_{i,j}\phi'(u)\partial_{x_i}u\partial_{x_j}v\\
+& = \sum_{i,j}^n \left(\int_{U} A_{i,j}\partial_{x_j}(\phi'(u)v)\partial_{x_i}udx-\int_{U} A_{i,j}\phi''(u)\partial_{x_i}u\partial_{x_j}u \cdot vdx\right).
+\end{align*}
+By uniform ellipticity and convexity of $\phi$ we get 
+\begin{equation*}
+\sum_{i,j}^n\int_{U} A_{i,j}\phi''(u)\partial_{x_i}u\partial_{x_j}u \cdot vdx \geq 0.
+\end{equation*}
+Also we have $u$ is the weak-solution of the original problem therefore
+\begin{equation*}
+\sum_{i,j}^n \left(\int_{U} A_{i,j}\partial_{x_j}(\phi'(u)v)\partial_{x_i}udx\right) = \phi'(u)v\sum_{i,j}^n \left(\int_{U} \partial_{x_j}(A_{i,j}\partial_{x_i}u)dx\right)=0.
+\end{equation*}
+Combining these we conclude that 
+\begin{equation*}
+B[\phi(u),v]\leq0.
+\end{equation*}
+By the density of test functions, we arrived the conclusion.
+\end{document}
