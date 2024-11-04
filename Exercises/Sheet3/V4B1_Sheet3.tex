@@ -65,6 +65,84 @@
 \begin{document}
 \maketitle
 
+\textbf{Exercise 3.1}\\
+Consider the one-dimensional wave equation for $(t,x)\in[0,\infty)\times\R$
+\begin{equation}\label{wave}
+    \partial_t^2u-\partial_x^2u=0,\quad u|_{t=0}=g,\quad \partial u_t|_{t=0}=f
+\end{equation}
+where $g,f:\R\to\R$ are given.\\
+(i) Show that for smooth $g,f$ d'Alembert's formula
+\[
+u(t,x)=\frac{1}{2}(g(x-t)+g(x+t))+\frac{1}{2}\int_{x-t}^{x+t}f(y)dy
+\]
+yields a solution to \eqref{wave}.
+\begin{proof}
+    If $g\in C^2(\R)$ and $f\in C^1(\R)$, the above formula gives a solution. Indeed, in this case, we can differentiate the expression for $u$ using ordinary rules of differentiation and we get for $(t,x)\in (0,\infty)\times\R$
+    \begin{gather*}
+        \partial_xu(t,x)=\frac{1}{2}(g'(x-t)+g'(x+t))+\frac{1}{2}(f(x+t)-f(x-t))\\
+        \partial_x^2u(t,x)=\frac{1}{2}(g''(x-t)+g''(x+t))+\frac{1}{2}(f'(x+t)-f'(x-t))\\
+        \partial_tu(t,x)=\frac{1}{2}(g'(x+t)-g'(x-t))+\frac{1}{2}(f(x+t)+f(x-t))\\
+        \partial_t^2u(x,t)=\frac{1}{2}(g''(x+t)+g''(x-t))+\frac{1}{2}(f'(x+t)-f'(x-t))
+    \end{gather*}
+    We see therefore that $u$ satisfies the one-dimensional wave equation in $(0,\infty)\times\R$ and its derivatives up to order 2 can be extended to $[0,\infty)\times\R$ since $g,f$ are uniformly continuous on compact sets. By directly evaluating the formula for $u$ and $\partial_tu$ at $(0,x)$, we see that $u$ satisfies the intial conditions.
+\end{proof}
+(ii) Let $f:[0,\infty)\times\R\to\R$ smooth and $v(t,x;s)$ be the solution to
+\[
+\partial_t^2v-\partial_x^2v=0,\quad v|_{t=s}=0,\quad\partial_tv|_{t=s}=f(s,\cdot).
+\]
+for all $s\geq 0$. Define
+\[
+u(t,x):=\int_0^tv(t,x;s)ds.
+\]
+Show that this provides a solution to the inhomogeneous wave equation
+\begin{equation}\label{inwave}
+    \partial_t^2u-\partial_x^2u=f,\quad u|_{t=0}=0,\quad \partial_tu|_{t=0}=0
+\end{equation}
+and compute a solution formula using (i).
+\begin{proof}
+    Suppose $f:[0,\infty)\times\R\to\R$ is $C^1$.\\
+    For a fixed $s\geq 0$, the function $w_s:[0,\infty)\times\R\to\R$ defined by
+    \[
+    w_s(t,x)=v(s+t,x;s),\quad\forall (t,x)\in [0,\infty)\times\R
+    \]
+    solves the following one-dimensional wave equation on $[0,\infty)\times\R$
+    \[
+    \partial_t^2w_s-\partial_x^2w_s=0,\quad w_s|_{t=0}=0,\quad \partial_tw_s|_{t=0}=f(s,\cdot).
+    \]
+    From this using part (i), we deduce that 
+    \[
+    w_s(t,x)=\frac{1}{2}\int_{x-t}^{x+t}f(s,y)dy,\quad\forall (t,x)\in [0,\infty)\times\R.
+    \]
+    This gives the following formula for $v$ on $\{(t,x;s)|0\leq s\leq t, x\in\R\}$
+    \[
+    v(t,x;s)=w_s(t-s,x)=\frac{1}{2}\int_{x+s-t}^{x+t-s}f(s,y)dy.
+    \]
+    In particular $v$ is a $C^2$ function.\\
+    Therefore $u$ is given by
+    \[
+    u(t,x)=\int_0^tv(t,x;s)ds=\frac{1}{2}\int_0^t\int_{x+s-t}^{x+t-s}f(s,y)dyds.
+    \]
+    To verify $u$ solves the inhomogeneous one-dimensional wave equation, we compute its derivatives
+    \begin{gather*}
+        \partial_tu(t,x)=v(t,x;t)+\int_{0}^t\partial_tv(t,x;s)ds=\int_0^t\partial_tv(t,x;s)ds\\
+        \partial_t^2u(t,x)=\partial_tv(t,x;t)+\int_0^t\partial_t^2v(t,x;s)ds=f(t,x)+\int_0^t\partial_t^2v(t,x;s)ds\\
+        \partial_xu(t,x)=\int_0^t\partial_xv(t,x;s)ds\\
+        \partial_x^2u(t,x)=\int_0^t\partial_x^2v(t,x;s)ds=\int_0^t\partial_t^2v(t,x;s)ds. 
+    \end{gather*}
+    From this we see that for $(t,x)\in (0,\infty)\times\R$, we have
+    \[
+    \partial_t^2u(t,x)-\partial_x^2u(t,x)=f(t,x).
+    \]
+    For $x\in\R$, we have
+    \[
+    u(0,x)=0\text{ and }\partial_tu(0,x)=0
+    \]
+\end{proof}
+(iii) Show that even if $f\in L^2_{\loc}((0,\infty)\times\R)$ the solution $u$ to \eqref{inwave} is in general not in $H^2_{\loc}((0,\infty)\times\R)$.
+\begin{proof}
+    
+\end{proof}
+
 \section*{3.2}
 
 By the assumption, we have
@@ -141,4 +219,66 @@ Combining these we conclude that
 B[\phi(u),v]\leq0.
 \end{equation*}
 By the density of test functions, we arrived the conclusion.
+
+\textbf{Exercise 3.4}\\
+Let $U\subset\R^n$ be an open bounded domain with smooth boundary. Consider the equation
+\begin{equation}\label{bilaplace}
+\begin{cases}
+    \Delta^2u=f &\text{in }U,\\
+    u=\frac{\partial u}{\partial\nu}=0&\text{on }\partial U.
+\end{cases}
+\end{equation}
+We say that $u\in H_0^2$ is a weak solution to \eqref{bilaplace} provided
+\[
+\int_U\Delta u\Delta v=\int_Ufv
+\]
+for all $v\in H_0^2$. Given $f\in L^2(U)$, prove that there exists a unique weak solution to \eqref{bilaplace}.
+\begin{proof}
+    Consider the map $F:H_0^2(U)\to\R$ defined by
+    \[
+    F(v)=\int_Ufv,\quad\forall v\in H_0^2(U).
+    \]
+    This map is well defined (Cauchy-Schwarz), linear (linearity of integral) and bounded. To prove boundedness, we argue as follow
+    \[
+    |F(v)|=\left|\int_Ufv\right|\leq \lVert f\rVert_{L^2}\lVert v\rVert_{L^2}\leq \lVert f\rVert_{L^2}\lVert v\rVert_{H^2_0}.
+    \]
+    Now consider the map $B:H_0^2(U)\times H_0^2(U)\to\R$ defined by
+    \[
+    B(u,v)=\int_U\Delta u\Delta v,\quad\forall u,v\in H_0^2(U).
+    \]
+    This map is well defined (Cauchy-Schwarz), bilinear (linearity of weak derivatives and integral), bounded and coercive. To prove boundedness, we use Cauchy-Schwarz
+    \[
+    |B(u,v)|=\left|\int_U\Delta u\Delta v\right|\leq\lVert\Delta u\rVert_{L^2}\lVert\Delta v\rVert_{L^2}\leq \lVert u\rVert_{H^2_0}\lVert v\rVert_{H_0^2}.
+    \]
+    To prove coercivity, we need to prove that there exists $\alpha>0$ such that 
+    \[
+    B(u,u)\geq\alpha\lVert u\rVert_{H_0^2}^2,\quad\forall u\in H_0^2(U).
+    \]
+    This is equivalent to showing that there exists $C>0$ such that 
+    \[
+    \lVert u\rVert_{H_0^2}^2\leq C\int_{U}(\Delta u)^2,\quad\forall u\in H_0^2(U).
+    \]
+    $U$ has smooth boundary and $u\in H_0^1(U)$, then in particular we have $u\in H_0^2(U)$ so we can apply Poincare's inequality and get
+    \[
+    \int_U|u|^2\leq C\int_U|Du|^2.
+    \]
+    As $u\in H_0^2(U)$ we know that $\forall i=1,\dots,n$ we have $D_iu\in H_0^1(U)$, so we can apply Poincare's inequality and get
+    \[
+    \int_U|D_iu|^2\leq C\int_U|D(D_iu)|^2.
+    \]
+    Combining these two observations, we see that it suffices then to show that for any $i,j=1,\dots,n$ we have
+    \[
+    \int_U|u_{x_ix_j}^2|^2\leq C\int_U(\Delta u)^2.
+    \]
+    Using the density of $C_c^\infty(U)$ in $H_0^2(U)$ (by definition), it suffices to prove such a constant $C$ exists if $u\in C_c^\infty(U)$. In this case, we have
+    \[
+    \begin{aligned}
+        \int_U(\Delta u)^2&=\int_U\sum_{i,j=1}^nu_{x_ix_i}u_{x_jx_j}\\
+        &=-\int_U\sum_{i,j=1}^nu_{x_jx_ix_i}u_{x_j}\\
+        &=\int_U\sum_{i,j=1}^n|u_{x_ix_j}|^2
+    \end{aligned}
+    \]
+    where we used integration by parts twice. This proves the coercivity bound for $B$ and we can thus apply Lax-Milgram theorem to conclude the existence of a unique weak solution in $H_0^2$ to the problem.
+\end{proof}
+
 \end{document}
