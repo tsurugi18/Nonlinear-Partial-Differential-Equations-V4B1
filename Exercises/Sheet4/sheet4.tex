@@ -1,0 +1,141 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{bbm}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{calrsfs}
+\usepackage{tikz-cd} 
+
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{proposition}{Proposition}[section] 
+\newtheorem{definition}{Definition}[section] 
+\newtheorem{lemma}{Lemma}[section] 
+\newtheorem{notation}{Notation}[section] 
+\newtheorem{remark}{Remark}[section] 
+\newtheorem{corollary}{Corollary}[section] 
+\newtheorem{terminology}{Terminology}[section] 
+\newtheorem{example}{Example}[section] 
+
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\PreSh}{PreSh}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Lie}{Lie}
+
+
+\title{V4A1 Sheet 5}
+\author{So Murata}
+\date{2024/2025 Winter Semester - Uni Bonn}
+
+\begin{document}
+\maketitle
+\section*{Problem 4.1}
+
+Using the density argument, we prove the statement holds for any $u\in\mathcal{C}^\infty_C(\Omega)$. Since $\Phi$ is a smooth function on a bounded domain, its jacobian is also bounded. In other words, for each $i,j$ ${\frac {\partial_i\Phi} {\partial x_j}}$ is bounded and continuous. Let $\varphi\in\mathcal{C}^\infty(B_1(0)\cap\mathbb{H}^n)$.
+\begin{equation*}
+\int (u\eta)\circ\Phi \partial_{x_i}\varphi dx = \int \sum_{k=1}^n ({\frac {\partial u} {\partial x_k}}\circ \Phi){\frac {\partial \Phi_k} {\partial x_i}}\varphi.
+\end{equation*}
+Since ${\frac {\partial u} {\partial x_k}},{\frac {\partial \Phi_k} {\partial x_i}}$ are continuous on the bounded domain. We have proven the theorem.
+\section*{Problem 4.2}
+
+By the Weak formulation of the problem we get that for any $\varphi\in\mathcal{C}^\infty_C(\Omega)$ we have
+
+\begin{equation}
+\int_\Omega \sum_{i,j=1}^n A^{i,j}D_iuD_j\varphi dx = \int_\Omega f\varphi dx.
+\label{weak_formulation_2}
+\end{equation}
+
+Let $\eta:\omega\to\mathbb{R}$ be a cutoff function such that
+\begin{equation*}
+\eta(x) = 
+\begin{cases}
+1,\quad(x\in B(x_0,r)),
+0, \quad (x\not\in\ B(x_0,R)).
+\end{cases}
+\end{equation*}
+for some $0<r<R$, with $|D\eta|\leq {\frac C {R-r}}$.\\
+\par Without the loss of generality, we may assume $\lambda=0$ as differentials of constants are $0$. Let $\varphi=u\eta^2$. 
+By substituting $\varphi$ into Equation \eqref{weak_formulation_2}, we get
+\begin{align*}
+\int_\Omega \sum_{i,j=1}^n A^{i,j}D_iu((D_ju)\eta^2+2(D_j\eta)u\eta) dx &= \int_\Omega fu\eta^2 dx,\\
+& =\int_\Omega \left(\sum_{i,j=1}^n A^{i,j}D_iu\eta D_ju\eta\right) dx\\
+&+\int_\Omega\left(\sum_{i,j=1}^n A^{i,j}D_iu\cdot 2(D_j\eta)\right)u\eta  dx\\
+& = I_1+I_2.
+\end{align*}
+
+Since $A$ is uniformly elliptic, we find a constant $\theta>0$ such that 
+\begin{equation*}
+\theta\int_{B_r(x_0)}|\nabla u|^2dx=\theta\int_\Omega|\nabla u\eta|^2dx\leq \int_\Omega \left(\sum_{i,j=1}^n A^{i,j}D_iu\eta D_ju\eta\right) dx=I_1.
+\end{equation*}
+
+Since $A$ is bounded, Cauchy-Schwarz we get,
+\begin{equation*}
+|I_2| \leq 2\Vert A\Vert_{L^\infty}\left(\int_\Omega\left(\eta |Du|\right)^2\right)^{{\frac 1 2}}\left(\int_\Omega (|D\eta| u)^2  dx\right)^{{\frac 1 2}}.
+\end{equation*}
+
+By using Young's inequality with $\varepsilon=\theta$ we get
+\begin{equation*}
+|I_2|\leq {\frac \varepsilon 2}\left(\int_\Omega\left(\eta |Du|\right)^2\right)+{\frac {\Vert A\Vert_{L^\infty}} {\varepsilon}}\left(\int_\Omega (|D\eta| u)^2  dx\right).
+\end{equation*}
+
+By condition on $D\eta$ we get
+
+\begin{equation*}
+|I_2|\leq {\frac \varepsilon 2}\left(\int_\Omega\left(\eta |Du|\right)^2\right)+{\frac {\Vert A\Vert_{L^\infty}} {\varepsilon}}{\frac {C^2} {(R-r)^2}}\left(\int_{B_R(x_0)\backslash B_r(x_0)} u^2  dx\right).
+\end{equation*}
+
+We observe that 
+\begin{equation*}
+f(x_1,\cdots,x_n) = \partial x_1\int_{(x_0)_1}^{x_1} f(t,x_2,\cdots,x_n)dx
+\end{equation*}
+By letting $F(x) = \int_{(x_0)_1}^{x_1} f(t,x_2,\cdots,x_n)dx$ we obtain
+\begin{equation*}
+\int_\Omega fu\eta^2dx = \int_\Omega D_1 uF\eta^2 + 2D_1\eta Fu\eta dx.
+\end{equation*}
+
+By using Cauchy-Schwarz and Young's inequality, we derive
+
+\begin{align*}
+|\int_\Omega fu\eta^2dx| \leq &{\frac \xi 2}\int_{B_R(x_0)} |D u|^2dx+{\frac 1 {2\xi}}\int_{B_R(x_0)} F^2dx\\
+& +{\frac {\rho C^2} {(R-r)^2}}\int_{B_R(x_0)\backslash B_r(x_0)}|u|^2dx + {\frac {1} {2\rho}}\int_{B_R(x_0)\backslash B_r(x_0)} F^2dx.
+\end{align*}
+
+Using Jensen's inequality we get
+\begin{equation*}
+\int_{B_R(x_0)}F^2dx\leq cR^2\int_{B_R(x_0)}f^2dx.
+\end{equation*}
+Combining these we get
+\begin{equation*}
+\theta\Vert\nabla u\Vert^2\leq {\frac 1 2}(\varepsilon+\xi)\Vert\nabla u\Vert^2+{\frac {C^2} {(R-r)^2}}(\rho+{\frac {\Vert A\Vert_{L^\infty}} \varepsilon})\int_{B_R(x_0)\backslash B_r(x_0)}|u|^2dx+{\frac {cR^2} {\min\{\xi,\rho\}}}\int_{B_R(x_0)}f^2dx.
+\end{equation*}
+Let $\varepsilon=\xi=\rho={\frac \theta 2}$ and 
+\begin{equation*}
+C = \sqrt{{\frac 4 {\theta^2}}c(1+{\frac 4 {\theta^2}}\Vert A\Vert_{L^\infty})^{-1}},\quad C' = {\frac 4 {\theta^2}}c.
+\end{equation*}
+We get the claim 
+\begin{equation*}
+\Vert\nabla u\Vert^2\leq {\frac {C'} {(R-r)^2}}\int_{B_R(x_0)\backslash B_r(x_0)}|u|^2dx+C'R^2\int_{B_R(x_0)}f^2dx.
+\end{equation*}
+\end{document}
