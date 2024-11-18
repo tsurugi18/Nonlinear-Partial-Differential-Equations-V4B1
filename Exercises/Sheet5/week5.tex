@@ -1,0 +1,96 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{bbm}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{calrsfs}
+\usepackage{tikz-cd} 
+
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{proposition}{Proposition}[section] 
+\newtheorem{definition}{Definition}[section] 
+\newtheorem{lemma}{Lemma}[section] 
+\newtheorem{notation}{Notation}[section] 
+\newtheorem{remark}{Remark}[section] 
+\newtheorem{corollary}{Corollary}[section] 
+\newtheorem{terminology}{Terminology}[section] 
+\newtheorem{example}{Example}[section] 
+
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\PreSh}{PreSh}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Lie}{Lie}
+
+
+\title{V4A1 Sheet 5}
+\author{So Murata}
+\date{2024/2025 Winter Semester - Uni Bonn}
+
+\begin{document}
+\maketitle
+Suppose the statement is false, then there exists $u_k$ for each $k\in\mathbb{N}$ such that
+\begin{equation*}
+[D^2u_k]_{C^{0,\alpha}}>k[\Delta u_k]_{C^{0,\alpha}}.
+\end{equation*}
+We can assume $[D^2u_k]_{C^{0,\alpha}}=1$ by dividing $u$ by $[D^2u_k]_{C^{0,\alpha}}$. Thus we have the inequality
+\begin{equation*}
+{\frac 1 k}>[\Delta u_k]_{C^{0,\alpha}}.
+\end{equation*}
+Using the pigeon hole principle on the definition of supremums, we find $i,j,k=1,\cdots,n$ such that infinitely many $x_l\in\mathbb{R}^n$ and $h_l>0$ we have
+\begin{equation*}
+{\frac {|D^2_{ij}u_l(x_l+h_l\underline{e}_k)-D^2_{ij}u_l(x_l)|} {h_l^\alpha}}\geq {\frac 1 {2n^3}}.
+\end{equation*}
+
+We define a shifted $u_l$ corresponding those $x_l$ and $h_l$ by 
+\begin{equation*}
+\tilde{u}_l(x) = h_l^{-2-\alpha}u_l(x_l+h_lx).
+\end{equation*}
+To summarize, we have
+\begin{equation*}
+[D^2\tilde{u}_l]_{C^{0,\alpha}}=1,\quad [\Delta \tilde{u}_l]_{C^{0,\alpha}}<{\frac 1 l},\quad |D^2_{ij}\tilde{u}_l(x)-D^2_{ij}\tilde{u}_l(0)|\geq {\frac 1 {2n^3}}.
+\end{equation*}
+By adding appropriate second order polynomial, we conclude that 
+\begin{equation*}
+\tilde{u}_l(0)=D\tilde{u}_l(0)=D^2\tilde{u}_l(0)=0.
+\end{equation*}
+Also we notice that at $\underline{e}_k$ we have
+\begin{equation*}
+\tilde{u}_l(\underline{e}_k) \geq {\frac 1 {2n^3}}.
+\end{equation*}
+By the definition of $[\cdot]_{C^{0,\alpha}}$, it is clear that $\tilde{u}_l$ is bounded. Transforming the definition, we condlue
+\begin{equation*}
+|\tilde{u}_l(x)|\leq C|h_lx|^{2+\alpha},\quad |D\tilde{u}_l(x)|\leq C|h_lx|^{1+\alpha},\quad |D^2\tilde{u}_l(x)|\leq |h_lx|^{\alpha}.
+\end{equation*}
+The sequence is globally bounded and equicontinuous by the definition of Holder condition and the assumption on $\alpha$. Furthermore, by appropriately large enough $R$, and ArzelàAscoli theorem on $B_R(0)$, the definition of $[\cdot]_{C^{0,\alpha}}$ on $\Delta u_l$, we conclude that 
+\begin{equation*}
+\Delta_u\equiv 0, \quad |D^2\tilde{u}(x)|\leq |h_lx|^{\alpha},\quad D^2_{ij}u_(\underline{e}_k)\geq  {\frac 1 {2n^3}}.
+\end{equation*}
+
+\begin{equation*}
+\lim_{|x|\to\infty} {\frac {|u(x)|} {|x|^3}} =0.
+\end{equation*}
+Thus, we conclude that $u$ is a polynomial of at most degree 2. Therefore but at $0$ all the derivatives vanish, we conclude $u\equiv 0$. This is a contradiction.
+\end{document}
